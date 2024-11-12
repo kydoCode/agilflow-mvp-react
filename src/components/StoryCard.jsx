@@ -10,12 +10,14 @@ export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
     setNodeRef,
     transform,
     transition,
+    isDragging: isSortableDragging,
   } = useSortable({ id: story.id });
 
   const cardStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
     ...style,
+    opacity: isSortableDragging ? 0.5 : undefined,
   };
 
   return (
