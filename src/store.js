@@ -1,7 +1,32 @@
 import { create } from 'zustand';
 
 export const useStore = create((set) => ({
-  stories: [],
+  stories: [
+    {
+      id: '1',
+      user: 'Product Manager',
+      action: 'create new user stories',
+      need: 'I can track project requirements',
+      status: 'todo',
+      createdAt: new Date(),
+    },
+    {
+      id: '2',
+      user: 'Developer',
+      action: 'implement user stories',
+      need: 'I can develop features',
+      status: 'doing',
+      createdAt: new Date(),
+    },
+    {
+      id: '3',
+      user: 'Tester',
+      action: 'test user stories',
+      need: 'I can ensure quality',
+      status: 'done',
+      createdAt: new Date(),
+    },
+  ],
   user: null,
   isAuthenticated: false,
 
