@@ -90,7 +90,7 @@ export const useStore = create(
       moveStory: (id, status) =>
         set((state) => ({
           stories: state.stories.map((story) =>
-            story.id === id ? { ...story, status } : story
+            story.id === id ? { ...story, status, updatedAt: new Date() } : story
           ),
         })),
     }),
