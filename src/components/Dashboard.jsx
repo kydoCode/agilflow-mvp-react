@@ -4,10 +4,10 @@ import { StoryModal } from './StoryModal';
 import { StoryCard } from './StoryCard';
 import { LogOut, Plus } from 'lucide-react';
 import {
-  SwapyProvider,
-  SwapyDroppable,
-  SwapyDraggable,
-} from 'swapy';
+  DndContext,
+  Droppable,
+  Draggable,
+} from '@dnd-kit/core';
 import toast from 'react-hot-toast';
 
 export function Dashboard() {
@@ -116,7 +116,7 @@ export function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <SwapyProvider
+        <DndContext
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           onDragCancel={handleDragCancel}
@@ -131,13 +131,13 @@ export function Dashboard() {
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">
                   {column.title}
                 </h2>
-                <SwapyDroppable
+                <Droppable
                   id={column.id}
                 >
                   {stories
                     .filter((story) => story.status === column.id)
                     .map((story) => (
-                      <SwapyDraggable
+                      <Draggable
                         key={story.id}
                         id={story.id}
                       >
@@ -147,13 +147,13 @@ export function Dashboard() {
                           onDelete={handleDelete}
                           style={getStoryStyle(story.id)}
                         />
-                      </SwapyDraggable>
+                      </Draggable>
                     ))}
-                </SwapyDroppable>
+                </Droppable>
               </div>
             ))}
           </div>
-        </SwapyProvider>
+        </DndContext>
       </main>
 
       <StoryModal
