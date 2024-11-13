@@ -1,6 +1,6 @@
 import React from 'react';
 import { Edit2, Trash2 } from 'lucide-react';
-import { useSwapyDraggable } from 'swapy';
+import { useDraggable } from '@dnd-kit/core';
 
 export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
   const {
@@ -9,14 +9,14 @@ export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
     setNodeRef,
     transform,
     transition,
-    isDragging: isSwapyDragging,
-  } = useSwapyDraggable({ id: story.id });
+    isDragging: isDraggableDragging,
+  } = useDraggable({ id: story.id });
 
   const cardStyle = {
     transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
     transition,
     ...style,
-    opacity: isSwapyDragging ? 0.5 : undefined,
+    opacity: isDraggableDragging ? 0.5 : undefined,
   };
 
   const handleEditClick = () => {
