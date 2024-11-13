@@ -17,27 +17,29 @@ import {
 import toast from 'react-hot-toast';
 
 export function Dashboard() {
-  const { stories, addStory, updateStory, deleteStory, moveStory, logout } = useStore();
+  const { stories, addStory, updateStory, deleteStory, moveStory, logout } = useStore((state) => state); // Removed unnecessary console.log
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingStory, setEditingStory] = useState(undefined);
   const [activeId, setActiveId] = useState(null);
 
   const handleDragStart = (event) => {
     setActiveId(event.active.id);
+    console.log('handleDragStart event:', event);
   };
 
   const handleDragEnd = (event) => {
     setActiveId(null);
     const { active, over } = event;
-    
+    console.log('handleDragEnd event:', event);
+
     if (!over) return;
 
-    const activeStory = stories.find(story => story.id === active.id);
+    const activeStory = stories.find((story) => story.id === active.id);
     const overId = over.id.toString();
-    
+
     // Find which column was dropped on
     const columns = ['todo', 'doing', 'done'];
-    const targetColumn = columns.find(col => overId.includes(col));
+    const targetColumn = columns.find((col) => overId.includes(col));
 
     if (targetColumn && activeStory.status !== targetColumn) {
       moveStory(active.id, targetColumn);
@@ -50,6 +52,7 @@ export function Dashboard() {
   };
 
   const handleSave = (story) => {
+    console.log('handleSave called with story:', story); // Added console log
     if (editingStory) {
       updateStory(editingStory.id, story);
       toast.success('Story updated successfully!');
@@ -61,11 +64,13 @@ export function Dashboard() {
   };
 
   const handleEdit = (story) => {
+    console.log('handleEdit called with story:', story);
     setEditingStory(story);
     setIsModalOpen(true);
   };
 
   const handleDelete = (id) => {
+    console.log('handleDelete called with id:', id);
     if (window.confirm('Are you sure you want to delete this story?')) {
       deleteStory(id);
       toast.success('Story deleted successfully!');
@@ -80,7 +85,7 @@ export function Dashboard() {
 
   const findContainer = (id) => {
     if (!id) return null;
-    const story = stories.find(story => story.id === id);
+    const story = stories.find((story) => story.id === id);
     return story ? story.status : null;
   };
 
@@ -134,9 +139,7 @@ export function Dashboard() {
                   {column.title}
                 </h2>
                 <SortableContext
-                  items={stories
-                    .filter((story) => story.status === column.id)
-                    .map((story) => story.id)}
+                  items={stories.map((story) => story.id)}
                   strategy={verticalListSortingStrategy}
                 >
                   {stories
@@ -157,7 +160,7 @@ export function Dashboard() {
           <DragOverlay>
             {activeId ? (
               <StoryCard
-                story={stories.find(story => story.id === activeId)}
+                story={stories.find((story) => story.id === activeId)}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 isDragging
