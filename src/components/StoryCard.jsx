@@ -1,7 +1,6 @@
 import React from 'react';
 import { Edit2, Trash2 } from 'lucide-react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { useSwapyDraggable } from 'swapy';
 
 export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
   const {
@@ -10,14 +9,14 @@ export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
     setNodeRef,
     transform,
     transition,
-    isDragging: isSortableDragging,
-  } = useSortable({ id: story.id });
+    isDragging: isSwapyDragging,
+  } = useSwapyDraggable({ id: story.id });
 
   const cardStyle = {
-    transform: CSS.Transform.toString(transform),
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
     transition,
     ...style,
-    opacity: isSortableDragging ? 0.5 : undefined,
+    opacity: isSwapyDragging ? 0.5 : undefined,
   };
 
   const handleEditClick = () => {
