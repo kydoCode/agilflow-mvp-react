@@ -20,6 +20,14 @@ export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
     opacity: isSortableDragging ? 0.5 : undefined,
   };
 
+  const handleEditClick = () => {
+    onEdit(story);
+  };
+
+  const handleDeleteClick = () => {
+    onDelete(story.id);
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -34,13 +42,13 @@ export function StoryCard({ story, onEdit, onDelete, isDragging, style }) {
         <span className="text-sm font-medium text-gray-500">As a {story.user}</span>
         <div className="flex space-x-2">
           <button
-            onClick={() => onEdit(story)}
+            onClick={handleEditClick}
             className="text-gray-400 hover:text-indigo-600 transition-colors"
           >
             <Edit2 className="w-4 h-4" />
           </button>
           <button
-            onClick={() => onDelete(story.id)}
+            onClick={handleDeleteClick}
             className="text-gray-400 hover:text-red-600 transition-colors"
           >
             <Trash2 className="w-4 h-4" />
