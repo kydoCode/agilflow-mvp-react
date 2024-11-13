@@ -15,7 +15,7 @@ export const useStore = create(
         user: 'User 2',
         action: 'want to update an existing story',
         need: 'to reflect changes in my task',
-        status: 'in progress',
+        status: 'doing',
         id: '2',
         createdAt: new Date(),
       },
@@ -39,13 +39,13 @@ export const useStore = create(
         user: 'User 5',
         action: 'want to add a new story to the list',
         need: 'to track my tasks',
-        status: 'in progress',
+        status: 'doing',
         id: '5',
         createdAt: new Date(),
       },
     ],
     user: null,
-    isAuthenticated: false,
+    isAuthenticated: true,
 
     login: (email, password) => {
       if (email === 'test@test.com' && password === 'testtest') {

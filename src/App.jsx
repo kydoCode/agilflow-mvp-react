@@ -1,8 +1,8 @@
 import React from 'react';
 import { useStore } from './store';
 import { Auth } from './components/Auth';
-import { Dashboard } from './components/Dashboard';
 import { Toaster } from 'react-hot-toast';
+import Dashboard from './pages/dashboard';
 import './index.css';
 
 function App() {
