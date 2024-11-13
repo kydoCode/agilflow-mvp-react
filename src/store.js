@@ -67,7 +67,7 @@ export const useStore = create(
           ...state.stories,
           {
             ...story,
-            id: Math.random().toString(36).substr(2, 9),
+            id: Math.random().toString(36).substr(2, 9), // Generate random ID taking into consideration previous existing numbers and its logic 
             createdAt: new Date(),
           },
         ],
