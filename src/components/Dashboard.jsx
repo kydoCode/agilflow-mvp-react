@@ -4,16 +4,10 @@ import { StoryModal } from './StoryModal';
 import { StoryCard } from './StoryCard';
 import { LogOut, Plus } from 'lucide-react';
 import {
-  DndContext,
-  DragOverlay,
-  closestCenter,
-  pointerWithin,
-  getFirstCollision,
-} from '@dnd-kit/core';
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+  SwapyProvider,
+  SwapyDroppable,
+  SwapyDraggable,
+} from 'swapy';
 import toast from 'react-hot-toast';
 
 export function Dashboard() {
@@ -122,11 +116,10 @@ export function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <DndContext
+        <SwapyProvider
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           onDragCancel={handleDragCancel}
-          collisionDetection={closestCenter}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {columns.map((column) => (
@@ -138,36 +131,29 @@ export function Dashboard() {
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">
                   {column.title}
                 </h2>
-                <SortableContext
-                  items={stories.map((story) => story.id)}
-                  strategy={verticalListSortingStrategy}
+                <SwapyDroppable
+                  id={column.id}
                 >
                   {stories
                     .filter((story) => story.status === column.id)
                     .map((story) => (
-                      <StoryCard
+                      <SwapyDraggable
                         key={story.id}
-                        story={story}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                        style={getStoryStyle(story.id)}
-                      />
+                        id={story.id}
+                      >
+                        <StoryCard
+                          story={story}
+                          onEdit={handleEdit}
+                          onDelete={handleDelete}
+                          style={getStoryStyle(story.id)}
+                        />
+                      </SwapyDraggable>
                     ))}
-                </SortableContext>
+                </SwapyDroppable>
               </div>
             ))}
           </div>
-          <DragOverlay>
-            {activeId ? (
-              <StoryCard
-                story={stories.find((story) => story.id === activeId)}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                isDragging
-              />
-            ) : null}
-          </DragOverlay>
-        </DndContext>
+        </SwapyProvider>
       </main>
 
       <StoryModal
