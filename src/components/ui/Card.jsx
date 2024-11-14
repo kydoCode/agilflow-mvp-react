@@ -1,4 +1,5 @@
 import { Edit3, Trash } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Card({ id, user, action, need }) {
 
@@ -12,7 +13,13 @@ export default function Card({ id, user, action, need }) {
         // On ouvre une confirmation pour confirmer la suppression
             // On utilise l'id du story pour récupérer et supprimer la story
 
+    const [editModal, setEditModal] = useState(false);
+    const [modalId, setModalId] = useState(null);
 
+    const handleEditClick = () => {
+        setEditModal(true);
+        setModalId(id);
+    }   
 
   return (
     <article className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 relative">
