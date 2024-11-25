@@ -1,12 +1,19 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 
-export default function Modal({ modalOpen, setIsModalOpen }) {
+export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave }) {
     const [newTask, setNewTask] = useState({ as: '', iwant: '', sothat: '', status: 'todo' });
+    const [editedStory, setEditedStory] = useState(editingStory || { user: '', action: '', need: '', status: 'todo' });
+
     const handleAddTask = () => {
         addStory({user: newTask.as, action: newTask.iwant, need: newTask.sothat, status: newTask.status});
         setIsModalOpen(false);
       };
+
+    const handleSave = () => {
+        onSave(editedStory);
+        setIsModalOpen(false);
+    };
       
     return (
         <>
@@ -77,12 +84,15 @@ export default function Modal({ modalOpen, setIsModalOpen }) {
                     >
                       Cancel
                     </button>
-                    <button
+                    {/* <button
                       className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                       onClick={handleAddTask}
                     >
                       Add user story
-                    </button>
+                    </button> */}
+                        <button className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" onClick={handleSave}>
+                          Save changes
+                        </button>
                   </div>
                 </div> 
              </div>
