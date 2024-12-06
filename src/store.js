@@ -4,44 +4,59 @@ export const useStore = create(
   (set) => ({
     stories: [
       {
-        user: 'User 1',
+        user: 'developer',
         action: 'want to create a new story',
         need: 'to manage my tasks effectively',
         status: 'todo',
         id: '1',
+        priority: 'medium',
+        assignedTo: null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        user: 'User 2',
+        user: 'product owner',
         action: 'want to update an existing story',
         need: 'to reflect changes in my task',
         status: 'doing',
         id: '2',
+        priority: 'high',
+        assignedTo: null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        user: 'User 3',
+        user: 'tester',
         action: 'want to delete a completed story',
         need: 'to keep my task list clean',
         status: 'done',
         id: '3',
+        priority: 'low',
+        assignedTo: null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        user: 'User 4',
+        user: 'teammate',
         action: 'want to move a story to a different column',
         need: 'to reflect the progress of my task',
         status: 'todo',
         id: '4',
+        priority: 'medium',
+        assignedTo: null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        user: 'User 5',
+        user: 'scrum master',
         action: 'want to add a new story to the list',
         need: 'to track my tasks',
         status: 'doing',
         id: '5',
+        priority: 'high',
+        assignedTo: null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ],
     user: null,
@@ -67,8 +82,9 @@ export const useStore = create(
           ...state.stories,
           {
             ...story,
-            id: Math.random().toString(36).substr(2, 9), // Generate random ID taking into consideration previous existing numbers and its logic 
+            id: Math.random().toString(36).substr(2, 9), 
             createdAt: new Date(),
+            updatedAt: new Date(),
           },
         ],
       })),
@@ -76,7 +92,7 @@ export const useStore = create(
     updateStory: (id, updatedStory) =>
       set((state) => ({
         stories: state.stories.map((story) =>
-          story.id === id ? { ...story, ...updatedStory } : story
+          story.id === id ? { ...story, ...updatedStory, updatedAt: new Date() } : story
         ),
       })),
 

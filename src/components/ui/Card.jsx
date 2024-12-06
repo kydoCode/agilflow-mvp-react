@@ -14,16 +14,20 @@ export default function Card({ id, user, action, need }) {
         // On ouvre une confirmation pour confirmer la suppression
             // On utilise l'id du story pour récupérer et supprimer la story
 
-    const [editModal, setEditModal] = useState(false);
+    const [editModal, setEditModal] = useState(false); // true false alors que doit prendre un id
     const [modalId, setModalId] = useState(null);
     const [deleteStory, setDeleteStory] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
 
     const handleEditClick = () => {
-        setEditModal(true);
-        setModalId(id);
-        setIsModalOpen(true);
+      console.log('Id:', id);
+      setEditModal(true);
+      setModalId(id);
+      return;
+      setIsModalOpen(true);
+
     }   
 
     // const handleDeleteClick = (id) => {
@@ -44,6 +48,7 @@ export default function Card({ id, user, action, need }) {
   };
 
     const handleSaveEdit = (editedStory) => {
+      setIsEditing(true);
       // Appel à l'API pour mettre à jour la story
       // Exemple : updateStory(id, editedStory)
       //   .then(() => {
@@ -58,7 +63,7 @@ export default function Card({ id, user, action, need }) {
     <article className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 relative">
       <div className="absolute top-4 right-4 flex space-x-2">
         <button aria-label="Edit" className="text-gray-500 hover:text-blue-500">
-          <Edit3 onClick={handleEditClick} modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} modalId={modalId} setModalId={setModalId}
+          <Edit3 onClick={handleEditClick} modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} modalId={modalId}
 size={20} />
   
         </button>
@@ -70,8 +75,9 @@ size={20} />
       <Modal 
             modalOpen={isModalOpen} 
             setIsModalOpen={setIsModalOpen}
-            editingStory={{ id, user, action, need }}
+            editingStory={{ id, user, action, need, status }}
             onSave={handleSaveEdit}
+            isEditing={isEditing}
         />
 
       <div className="space-y-4">
