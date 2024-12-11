@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useForm } from 'react';
+// import React, { useForm } from 'react-hook-form';
 import { Mail, Lock, User } from 'lucide-react';
 
 export default function Register() {
@@ -21,6 +22,40 @@ export default function Register() {
                     // Rediriger vers la page dashboard 
     // Logique d'inscription à implémenter
     // console.log('Registration attempt with:', { name, email, password, confirmPassword, role });
+
+    const validationRules = {
+      name: { required: "Ce champ est obligatoire" },
+      email: { required: "L'email est obligatoire", pattern: /^\S+@\S+$/i },
+      password: { required: "Le mot de passe est obligatoire", minLength: 8 },
+      confirmPassword: { required: "Confirmation du mot de passe est obligatoire", minLength: 8 },
+      role: { required: "Le rôle est obligatoire" }
+    };
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const form = document.querySelector("createUserForm");
+
+    
+    try {
+      // voir en JS pour post un form (fetch)
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        
+        const formData = new FormData(form);
+          try {
+            const response = await fetch("http://localhost:3000/api/auth/register/", {
+              method: "POST",
+              body: formData
+            });
+            const data = await response.json();
+            console.log("Réponse du serveur:", data);
+          } catch (error) {
+            console.error("Erreur:", error);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+      console("Corrigez votre saisie");
+    }
   };
 
   return (
@@ -30,7 +65,7 @@ export default function Register() {
         {error && (
             <p className='text-red-500'>{error}</p>
         )}
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form id="createUserForm" onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Nom
