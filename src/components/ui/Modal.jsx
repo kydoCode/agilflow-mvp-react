@@ -1,7 +1,9 @@
 import { X } from "lucide-react";
 import { useState } from "react";
+import { useStore } from "../../store";
 
 export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave, isEditing }) { 
+    const { addStory, updateStory } = useStore();
     const [task, setTask] = useState({ as: '', iwant: '', sothat: '', status: 'todo' });
     const [editedStory, setEditedStory] = useState(editingStory || { user: '', action: '', need: '', status: 'todo' });
 
@@ -23,13 +25,13 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
         console.log(task);
         
         // Si tous les champs sont remplis, ajouter le nouvel user story
-        
-        // addStory({user: task.as, action: task.iwant, need: task.sothat, status: task.status});
+        addStory({user: task.as, action: task.iwant, need: task.sothat, status: task.status});
         
         setIsModalOpen(false);
       };
 
     const handleSave = () => {
+        updateStory(editedStory.id, editedStory);
         setIsModalOpen(false);
         console.log('Saved!');
     };
@@ -55,8 +57,8 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             <input
               id="as"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={currentTask.as} // Use currentTask instead of task
-              onChange={(e) => setCurrentTask({ ...currentTask, as: e.target.value })} // Update state accordingly
+              value={editedStory.user}
+              onChange={(e) => setEditedStory({ ...editedStory, user: e.target.value })}
               placeholder="as user/developer/product owner..."
             />
           </div>
@@ -67,8 +69,8 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             <input
               id="iwant"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={currentTask.iwant} // Use currentTask instead of task
-              onChange={(e) => setCurrentTask({ ...currentTask, iwant: e.target.value })}
+              value={editedStory.action}
+              onChange={(e) => setEditedStory({ ...editedStory, action: e.target.value })}
               placeholder="I want..."
             />
           </div>
@@ -79,8 +81,8 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             <textarea
               id="sothat"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={currentTask.sothat} // Use currentTask instead of task
-              onChange={(e) => setCurrentTask({ ...currentTask, sothat: e.target.value })}
+              value={editedStory.need}
+              onChange={(e) => setEditedStory({ ...editedStory, need: e.target.value })}
               placeholder="So that..."
               rows={3}
             />
@@ -90,8 +92,8 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             <select
               id="status"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={currentTask.status} // Use currentTask instead of task
-              onChange={(e) => setCurrentTask({ ...currentTask, status: e.target.value })}
+              value={editedStory.status}
+              onChange={(e) => setEditedStory({ ...editedStory, status: e.target.value })}
             >
               <option value="todo">Todo</option>
               <option value="doing">Doing</option>
@@ -101,11 +103,10 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
           <div className="mt-6 flex justify-end space-x-3">
             <button
               className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              onClick={() => { setCurrentTask({ as: '', iwant: '', sothat: '', status: 'todo' }); setIsModalOpen(false); }}
+              onClick={() => { setEditedStory({ user: '', action: '', need: '', status: 'todo' }); setIsModalOpen(false); }}
             >
               Cancel
             </button>
-            {/* Save changes button */}
             <button 
               className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" 
               onClick={handleSave}
@@ -123,8 +124,6 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
       
     return (
         <>
-        {/* if else */}
-        {/* Create */}
         {modalOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
              <div className="bg-white p-6 rounded-lg w-full max-w-md">
@@ -192,22 +191,16 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
                       className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      onClick={() => {settask({as: '', iwant: '', sothat: '', status: 'todo'}); setIsModalOpen(false)}}
+                      onClick={() => {setTask({as: '', iwant: '', sothat: '', status: 'todo'}); setIsModalOpen(false)}}
                     >
                       Cancel
                     </button>
-                    {/* <button
-                      className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    <button 
+                      className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" 
                       onClick={handleAddTask}
                     >
                       Add user story
-                    </button> */}
-                        <button 
-                          className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" 
-                          onClick={handleAddTask}
-                        >
-                          Add user story
-                        </button>
+                    </button>
                   </div>
                 </div> 
              </div>
