@@ -5,7 +5,7 @@ import Card from '../components/ui/Card';
 import Modal from '../components/ui/Modal';
 
 export default function Dashboard() {
-  const { stories, addStory } = useStore();
+  const { stories, addStory, updateStory, deleteStory } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const filterByStatus = (status) => {
     const filteredStories = stories.filter((story) => story.status === status);

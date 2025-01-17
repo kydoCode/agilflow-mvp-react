@@ -10,11 +10,11 @@ export function Auth() {
   const [password, setPassword] = useState('');
   const { login, register } = useStore();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (isLogin) {
-      const success = login(email, password);
+      const success = await login(email, password);
       if (!success) {
         toast.error('Identifiants invalides');
       }
@@ -23,7 +23,7 @@ export function Auth() {
         toast.error('Veuillez entrer votre nom');
         return;
       }
-      register(name, email, password);
+      await register(name, email, password);
       toast.success('Inscription réussie!');
     }
   };

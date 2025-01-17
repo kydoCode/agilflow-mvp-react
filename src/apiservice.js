@@ -1,7 +1,3 @@
-// fetch l'api de stories
-// fetch l'api de users
-
-
 const BASE_URL = 'http://localhost:3000/api/userstories';
 
 export const ApiService = {
@@ -63,8 +59,8 @@ export const ApiService = {
         return response.json();
     },
 
-    updateStory(id, story) {
-        const response = fetch(`${BASE_URL}/${id}`, {
+    async updateStory(id, story) {
+        const response = await fetch(`${BASE_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +68,6 @@ export const ApiService = {
             body: JSON.stringify(story),
         });
         return response.json();
-
     },
 
     async deleteStory(id) {
@@ -86,7 +81,14 @@ export const ApiService = {
     },
 
     async addStory(story) {
-        const { user, action, need, status, priority, assignedTo } = story;
+        const response = await fetch(`${BASE_URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(story),
+        });
+        return response.json();
     }
 }
 

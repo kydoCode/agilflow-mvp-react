@@ -1,105 +1,64 @@
 import { create } from 'zustand';
+import { ApiService } from './apiservice';
 
 export const useStore = create(
   (set) => ({
-    stories: [
-      {
-        user: 'developer',
-        action: 'want to create a new story',
-        need: 'to manage my tasks effectively',
-        status: 'todo',
-        id: '1',
-        priority: 'medium',
-        assignedTo: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        user: 'product owner',
-        action: 'want to update an existing story',
-        need: 'to reflect changes in my task',
-        status: 'doing',
-        id: '2',
-        priority: 'high',
-        assignedTo: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        user: 'tester',
-        action: 'want to delete a completed story',
-        need: 'to keep my task list clean',
-        status: 'done',
-        id: '3',
-        priority: 'low',
-        assignedTo: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        user: 'teammate',
-        action: 'want to move a story to a different column',
-        need: 'to reflect the progress of my task',
-        status: 'todo',
-        id: '4',
-        priority: 'medium',
-        assignedTo: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        user: 'scrum master',
-        action: 'want to add a new story to the list',
-        need: 'to track my tasks',
-        status: 'doing',
-        id: '5',
-        priority: 'high',
-        assignedTo: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ],
+    stories: [],
     user: null,
-    isAuthenticated: true,
+    isAuthenticated: false,
 
-    login: (email, password) => {
-      if (email === 'test@test.com' && password === 'testtest') {
-        set({ user: { email, password }, isAuthenticated: true });
+    login: async (email, password) => {
+      const response = await ApiService.login(email, password);
+      if (response.token) {
+        set({ user: response.user, isAuthenticated: true });
+        localStorage.setItem('token', response.token);
         return true;
       }
       return false;
     },
 
-    logout: () => set({ user: null, isAuthenticated: false }),
-
-    register: (email, password) => {
-      set({ user: { email, password }, isAuthenticated: true });
+    logout: () => {
+      set({ user: null, isAuthenticated: false });
+      localStorage.removeItem('token');
     },
 
-    addStory: (story) =>
+    register: async (name, email, password) => {
+      const response = await ApiService.register(name, email, password);
+      if (response.token) {
+        set({ user: response.user, isAuthenticated: true });
+        localStorage.setItem('token', response.token);
+      }
+    },
+
+    addStory: async (story) => {
+      const response = await ApiService.addStory(story);
       set((state) => ({
         stories: [
           ...state.stories,
           {
-            ...story,
-            id: Math.random().toString(36).substr(2, 9), 
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            ...response,
+            createdAt: new Date(response.createdAt),
+            updatedAt: new Date(response.updatedAt),
           },
         ],
-      })),
+      }));
+    },
 
-    updateStory: (id, updatedStory) =>
+    updateStory: async (id, updatedStory) => {
+      const response = await ApiService.updateStory(id, updatedStory);
       set((state) => ({
         stories: state.stories.map((story) =>
-          story.id === id ? { ...story, ...updatedStory, updatedAt: new Date() } : story
+          story.id === id ? { ...story, ...response, updatedAt: new Date(response.updatedAt) } : story
         ),
-      })),
+      }));
+    },
 
-    deleteStory: (id) =>
+    deleteStory: async (id) => {
+      await ApiService.deleteStory(id);
       set((state) => ({
         stories: state.stories.filter((story) => story.id !== id),
-      })),
+      }));
+    },
 
     moveStory: (id, status) =>
       set((state) => ({
