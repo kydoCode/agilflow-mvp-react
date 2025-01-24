@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ApiService } from './apiservice';
+import { apiService } from './ApiService';
 
 export const useStore = create(
   (set) => ({
@@ -8,7 +8,7 @@ export const useStore = create(
     isAuthenticated: false,
 
     login: async (email, password) => {
-      const response = await ApiService.login(email, password);
+      const response = await apiService.login(email, password);
       if (response.token) {
         set({ user: response.user, isAuthenticated: true });
         localStorage.setItem('token', response.token);
@@ -22,8 +22,8 @@ export const useStore = create(
       localStorage.removeItem('token');
     },
 
-    register: async (name, email, password) => {
-      const response = await ApiService.register(name, email, password);
+    register: async (name, email, password, role) => {
+      const response = await apiService.register(name, email, password, role);
       if (response.token) {
         set({ user: response.user, isAuthenticated: true });
         localStorage.setItem('token', response.token);
@@ -31,7 +31,7 @@ export const useStore = create(
     },
 
     addStory: async (story) => {
-      const response = await ApiService.addStory(story);
+      const response = await apiService.addStory(story);
       set((state) => ({
         stories: [
           ...state.stories,
@@ -45,7 +45,7 @@ export const useStore = create(
     },
 
     updateStory: async (id, updatedStory) => {
-      const response = await ApiService.updateStory(id, updatedStory);
+      const response = await apiService.updateStory(id, updatedStory);
       set((state) => ({
         stories: state.stories.map((story) =>
           story.id === id ? { ...story, ...response, updatedAt: new Date(response.updatedAt) } : story
@@ -54,7 +54,7 @@ export const useStore = create(
     },
 
     deleteStory: async (id) => {
-      await ApiService.deleteStory(id);
+      await apiService.deleteStory(id);
       set((state) => ({
         stories: state.stories.filter((story) => story.id !== id),
       }));

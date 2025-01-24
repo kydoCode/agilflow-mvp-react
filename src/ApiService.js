@@ -1,8 +1,9 @@
 const BASE_URL = 'http://localhost:3000/api/userstories';
+const BASE_URL_TWO = 'http://localhost:3000/api/auth';
 
-export const ApiService = {
+export const apiService = {
     async login(email, password) {
-        const response = await fetch(`${BASE_URL}/login`, {
+        const response = await fetch(`${BASE_URL_TWO}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -14,8 +15,8 @@ export const ApiService = {
         });
         return response.json();
     },
-    async register(name, email, password) {
-        const response = await fetch(`${BASE_URL}/register`, {
+    async register(name, email, password, role) {
+        const response = await fetch(`${BASE_URL_TWO}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,12 +25,13 @@ export const ApiService = {
                 name,
                 email,
                 password,
+                role
             }),
         });
         return response.json();
     },
     async getProfile(token) {
-        const response = await fetch(`${BASE_URL}/profile`, {
+        const response = await fetch(`${BASE_URL_TWO}/profile`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -92,13 +94,4 @@ export const ApiService = {
     }
 }
 
-// Utilisation (Par exemple sur login.jsx)
-// On importe le service
-import { apiService } from "../ApiService";
 
-// On appelle le service
-                    // email et password récupéré depuis la page login.jsx
-const datas = await apiService.login(email, password);
-
-// Récupérer le profil
-const profile = await apiService.getProfile(datas.token)
