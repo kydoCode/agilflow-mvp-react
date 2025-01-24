@@ -18,9 +18,12 @@ export default function Register() {
     setSuccess('');
 
     try {
-      await register(name, email, password, role);
+// const apiResponse = await apiService.register(name, email, password, role);
+// console.log(apiResponse); // Check if the response indicates success or contains errors
+await register(name, email, password, role);
       // Rediriger vers la page dashboard après l'inscription réussie
       setSuccess('Inscription réussie ! Vous allez être redirigé...');
+      console.log(name, email, password, role);
       setTimeout(() => {
         window.location.href = '/';
       }, 5000);
