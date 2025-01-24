@@ -8,19 +8,25 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const { register } = useStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
     try {
-      await register(name, email, password);
+      await register(name, email, password, role);
       // Rediriger vers la page dashboard après l'inscription réussie
-      window.location.href = '/';
+      setSuccess('Inscription réussie ! Vous allez être redirigé...');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 5000);
     } catch (err) {
       setError('Erreur lors de l\'inscription. Veuillez réessayer.');
+      console.error(err);
     }
   };
 
@@ -30,6 +36,9 @@ export default function Register() {
         <h1 className="text-2xl font-bold mb-6 text-center">Inscription</h1>
         {error && (
           <p className='text-red-500'>{error}</p>
+        )}
+        {success && (
+          <p className='text-green-500'>{success}</p>
         )}
         <form id="createUserForm" onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">

@@ -1,20 +1,39 @@
 import React, { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
+import { apiService } from "../../src/ApiService";
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logique de connexion à implémenter
-    console.log('Login attempt with:', { email, password });
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const data = await apiService.login(email, password);
+      const profile = await apiService.getProfile(data.token);
+      
+      // Handle successful login (e.g., store token, redirect)
+      console.log('Login successful:', { data, profile });
+      
+      // TODO: Add logic to store the token and redirect the user
+    } catch (err) {
+      setError('Login failed. Please check your credentials.');
+      console.error('Login error:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Connexion</h1>
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -52,10 +71,11 @@ export default function Login() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               type="submit"
+              disabled={isLoading}
             >
-              Se connecter
+              {isLoading ? 'Connexion...' : 'Se connecter'}
             </button>
             <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
               Mot de passe oublié ?
