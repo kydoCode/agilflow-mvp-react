@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 import { useStore } from './store';
 // import { Auth } from './components/Auth';
 import { Toaster } from 'react-hot-toast';
-import Dashboard from './pages/dashboard'; 
+import Dashboard from './pages/dashboard';
 import './index.css';
 import Login from './pages/login';
 import Register from './pages/register';
@@ -11,6 +11,11 @@ import Register from './pages/register';
 
 function App() {
   const isAuthenticated = useStore((state) => state.isAuthenticated);
+  const store = useStore();
+
+  useEffect(() => {
+    store.initializeAuth();
+  }, [store]);
 
   return (
     <>

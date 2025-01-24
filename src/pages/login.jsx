@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
 import { apiService } from "../../src/ApiService";
+import { useStore } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const setIsAuthenticated = useStore((state) => state.setIsAuthenticated);
+  const setToken = useStore((state) => state.setToken);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +26,9 @@ export default function Login() {
       console.log('Login successful:', { data, profile });
       
       // TODO: Add logic to store the token and redirect the user
+      console.log('Token stored:', data.token);
+      setIsAuthenticated(true);
+      navigate('/'); // Redirect to the home page or dashboard
     } catch (err) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', err);
