@@ -2,10 +2,23 @@ import { create } from 'zustand';
 import { apiService } from './ApiService';
 
 export const useStore = create(
-  (set) => ({
+  (set, get) => ({
     stories: [],
     user: null,
     isAuthenticated: false,
+    
+    setIsAuthenticated: (value) => set({ isAuthenticated: value }),
+    setToken: (token) => set({ token: token }),
+
+    initializeAuth: () => {
+      const token = localStorage.getItem('token');
+      const currentIsAuthenticated = get().isAuthenticated;
+      if (token && !currentIsAuthenticated) {
+        set({ isAuthenticated: true });
+      } else if (!token && currentIsAuthenticated) {
+        set({ isAuthenticated: false });
+      }
+    },
 
     login: async (email, password) => {
       const response = await apiService.login(email, password);
