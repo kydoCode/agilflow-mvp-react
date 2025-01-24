@@ -28,6 +28,7 @@ export default function Login() {
       // TODO: Add logic to store the token and redirect the user
       console.log('Token stored:', data.token);
       setIsAuthenticated(true);
+      console.log('setIsAuthenticated(true) called in login.jsx');
       navigate('/'); // Redirect to the home page or dashboard
     } catch (err) {
       setError('Login failed. Please check your credentials.');

@@ -13,10 +13,13 @@ export const useStore = create(
     initializeAuth: () => {
       const token = localStorage.getItem('token');
       const currentIsAuthenticated = get().isAuthenticated;
+      console.log('initializeAuth - token:', token, 'isAuthenticated:', currentIsAuthenticated);
       if (token && !currentIsAuthenticated) {
         set({ isAuthenticated: true });
+        console.log('initializeAuth - setting isAuthenticated to true');
       } else if (!token && currentIsAuthenticated) {
         set({ isAuthenticated: false });
+        console.log('initializeAuth - setting isAuthenticated to false');
       }
     },
 
