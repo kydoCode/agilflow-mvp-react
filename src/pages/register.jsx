@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Mail, Lock, User } from 'lucide-react';
 import { useStore } from '../store';
+import { useForm } from 'react-hook-form';
+import { ApiService } from '../apiservice';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -39,6 +41,7 @@ await register(name, email, password, role);
         <h1 className="text-2xl font-bold mb-6 text-center">Inscription</h1>
         {error && (
           <p className='text-red-500'>{error}</p>
+          <p className='text-red-500'>{error}</p>
         )}
         {success && (
           <p className='text-green-500'>{success}</p>
@@ -48,52 +51,40 @@ await register(name, email, password, role);
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Nom
             </label>
-            <div className="relative">
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
-                id="name"
-                type="text"
-                placeholder="Nom complet"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <User className="absolute left-3 top-2 text-gray-400" size={20} />
-            </div>
+            <input
+              {...register("name", { required: "Ce champ est obligatoire" })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
+              type="text"
+              placeholder="Nom complet"
+            />
+            {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+            <User className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
-            <div className="relative">
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
-                id="email"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Mail className="absolute left-3 top-2 text-gray-400" size={20} />
-            </div>
+            <input
+              {...register("email", { required: "L'email est obligatoire", pattern: { value: /^\S+@\S+$/i, message: "Email invalide" } })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
+              type="email"
+              placeholder="Email"
+            />
+            {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+            <Mail className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               Mot de passe
             </label>
-            <div className="relative">
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
-                id="password"
-                type="password"
-                placeholder="******************"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <Lock className="absolute left-3 top-2 text-gray-400" size={20} />
-            </div>
+            <input
+              {...register("password", { required: "Le mot de passe est obligatoire", minLength: { value: 8, message: "Le mot de passe doit contenir au moins 8 caractères" } })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
+              type="password"
+              placeholder="******************"
+            />
+            {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
+            <Lock className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">
@@ -128,3 +119,4 @@ await register(name, email, password, role);
     </div>
   );
 }
+

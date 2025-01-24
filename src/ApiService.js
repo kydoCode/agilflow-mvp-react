@@ -93,3 +93,14 @@ export const apiService = {
         return response.json();
     }
 }
+
+// Utilisation (Par exemple sur login.jsx)
+// On importe le service
+// import { apiService } from "../ApiService";
+
+// On appelle le service 
+//                     // email et password récupéré depuis la page login.jsx
+// const datas = await apiService.login(email, password);
+
+// Récupérer le profil
+// const profile = await apiService.getProfile(datas.token)
