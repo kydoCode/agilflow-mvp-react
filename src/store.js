@@ -15,12 +15,22 @@ export const useStore = create(
       const token = localStorage.getItem('token');
       const currentIsAuthenticated = get().isAuthenticated;
       console.log('initializeAuth - token:', token, 'isAuthenticated:', currentIsAuthenticated);
-      if (token) { // Modified condition
-        set({ isAuthenticated: true });
-        console.log('initializeAuth - setting isAuthenticated to true');
-      } else {
-        set({ isAuthenticated: false });
-        console.log('initializeAuth - setting isAuthenticated to false');
+      if (currentIsAuthenticated) {
+        console.log('initializeAuth - already authenticated, skipping profile fetch');
+        return; // Skip fetching profile if already authenticated
+      }
+      if (token) {
+        console.log('initializeAuth - token found, fetching profile');
+        apiService.getProfile(token)
+          .then(profile => {
+            set({ isAuthenticated: true, user: profile });
+            console.log('initializeAuth - profile fetched and set', profile);
+          })
+          .catch(error => {
+            console.error('initializeAuth - error fetching profile:', error);
+            localStorage.removeItem('token'); // Clear invalid token
+            set({ isAuthenticated: false, user: null });
+          });
       }
       console.log('initializeAuth - end'); // Added log
     },
@@ -28,9 +38,15 @@ export const useStore = create(
     login: async (email, password) => {
       const response = await apiService.login(email, password);
       if (response.token) {
-        set({ user: response.user, isAuthenticated: true });
-        localStorage.setItem('token', response.token);
-        return true;
+        localStorage.setItem('token', response.token); // Store token first
+        try {
+          const profile = await apiService.getProfile(response.token);
+          set({ user: profile, isAuthenticated: true });
+          return true;
+        } catch (error) {
+          console.error("Get profile error:", error);
+          return false;
+        }
       }
       return false;
     },
@@ -84,5 +100,14 @@ export const useStore = create(
           story.id === id ? { ...story, status, updatedAt: new Date() } : story
         ),
       })),
+
+    fetchStories: async () => {
+      try {
+        const fetchedStories = await apiService.getStories();
+        set({ stories: fetchedStories });
+      } catch (error) {
+        console.error("Fetch stories error:", error);
+      }
+    },
   })
 );

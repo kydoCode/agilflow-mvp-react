@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     store.initializeAuth();
     console.log('App.jsx useEffect - initializeAuth called');
+    console.log('App.jsx - After useEffect, isAuthenticated:', isAuthenticated);
   }, []);
 
   console.log('App.jsx - isAuthenticated:', isAuthenticated);
