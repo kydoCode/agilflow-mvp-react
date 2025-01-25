@@ -1,9 +1,11 @@
-import { Edit3, Trash } from 'lucide-react';
 import { useState } from 'react';
+import { FiFlag } from 'react-icons/fi';
+import { MdEdit } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 import Modal from './Modal';
 import { useStore } from '../../store';
 
-export default function Card({ id, user, action, need, status }) {
+export default function Card({ id, user, action, need, status, priority }) {
     const { deleteStory, updateStory } = useStore();
 
     const [editModal, setEditModal] = useState(false);
@@ -30,16 +32,37 @@ export default function Card({ id, user, action, need, status }) {
         setIsEditing(false);
     };
 
+    const getPriorityColor = (priority) => {
+        switch (priority) {
+            case 'high':
+                return 'red-500';
+            case 'medium':
+                return 'yellow-500';
+            case 'low':
+                return 'green-500';
+            default:
+                return 'gray-500'; // Default color if priority is not defined
+        }
+    };
+
+    const priorityColor = getPriorityColor(priority);
+
+
     return (
         <article className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 relative">
             <div className="absolute top-4 right-4 flex space-x-2">
                 <button aria-label="Edit" className="text-gray-500 hover:text-blue-500">
-                    <Edit3 onClick={handleEditClick} size={20} />
+                    <MdEdit onClick={handleEditClick} size={20} />
                 </button>
                 <button aria-label="Delete" className="text-gray-500 hover:text-red-500">
-                    <Trash onClick={handleDeleteClick} size={20} />
+                    <MdDelete onClick={handleDeleteClick} size={20} />
                 </button>
             </div>
+
+             <div className="absolute bottom-4 right-4">
+                    <FiFlag size={20} color={`var(--${priorityColor})`}/>
+                </div>
+
 
             <Modal
                 modalOpen={isModalOpen}
@@ -55,7 +78,7 @@ export default function Card({ id, user, action, need, status }) {
                         En tant que
                     </span>
                     <p className="text-gray-800 font-medium pt-1">
-                        {user}
+                        {user?.assignee?.role}
                     </p>
                 </div>
 
