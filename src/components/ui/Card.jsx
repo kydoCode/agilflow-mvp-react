@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FiFlag } from 'react-icons/fi';
+import { FiFlag } from 'react-icons/fi'; // replaced by Flag from lucid-react
+import { Flag } from "lucide-react";
 import { MdEdit } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md';
 import Modal from './Modal';
@@ -33,15 +34,16 @@ export default function Card({ id, user, action, need, status, priority }) {
     };
 
     const getPriorityColor = (priority) => {
+        console.log("Priority value:", priority); // Debug log
         switch (priority) {
             case 'high':
-                return 'red-500';
+                return 'red';
             case 'medium':
-                return 'yellow-500';
+                return 'yellow';
             case 'low':
-                return 'green-500';
+                return 'green';
             default:
-                return 'gray-500'; // Default color if priority is not defined
+                return 'gray'; // Default color if priority is not defined
         }
     };
 
@@ -60,7 +62,7 @@ export default function Card({ id, user, action, need, status, priority }) {
             </div>
 
              <div className="absolute bottom-4 right-4">
-                    <FiFlag size={20} color={`var(--${priorityColor})`}/>
+                    <Flag size={20} color={priorityColor}/>
                 </div>
 
 
@@ -75,11 +77,8 @@ export default function Card({ id, user, action, need, status, priority }) {
             <div className="space-y-4">
                 <div className="flex items-start space-x-2">
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                        En tant que
+                        En tant que {role}
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
-                        {user?.assignee?.role}
-                    </p>
                 </div>
 
                 <div className="flex items-start space-x-2">
