@@ -79,10 +79,12 @@ export const apiService = {
     },
 
     async updateStory(id, story) {
+        const token = localStorage.getItem('token');
         const response = await fetch(`${BASE_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(story),
         });
@@ -90,10 +92,12 @@ export const apiService = {
     },
 
     async deleteStory(id) {
+        const token = localStorage.getItem('token');
         const response = await fetch(`${BASE_URL}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
         });
         return response.json();
