@@ -11,16 +11,18 @@ export const useStore = create(
     setToken: (token) => set({ token: token }),
 
     initializeAuth: () => {
+      console.log('initializeAuth - start'); // Added log
       const token = localStorage.getItem('token');
       const currentIsAuthenticated = get().isAuthenticated;
       console.log('initializeAuth - token:', token, 'isAuthenticated:', currentIsAuthenticated);
-      if (token && !currentIsAuthenticated) {
+      if (token) { // Modified condition
         set({ isAuthenticated: true });
         console.log('initializeAuth - setting isAuthenticated to true');
-      } else if (!token && currentIsAuthenticated) {
+      } else {
         set({ isAuthenticated: false });
         console.log('initializeAuth - setting isAuthenticated to false');
       }
+      console.log('initializeAuth - end'); // Added log
     },
 
     login: async (email, password) => {
@@ -34,7 +36,7 @@ export const useStore = create(
     },
 
     logout: () => {
-      set({ user: null, isAuthenticated: false });
+      set({ isAuthenticated: false, user: null }); // Update isAuthenticated and clear user
       localStorage.removeItem('token');
     },
 
