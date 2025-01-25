@@ -29,6 +29,7 @@ export default function Login() {
       
       // TODO: Add logic to store the token and redirect the user
       console.log('Token stored:', data.token);
+      localStorage.setItem('token', data.token); // Store the token in localStorage
       setIsAuthenticated(true);
       navigate('/'); // Redirect to the home page or dashboard
     } catch (err) {
@@ -38,6 +39,8 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+
+  console.log('Login.jsx - isAuthenticated on render:', useStore.getState().isAuthenticated); // Log on render
 
   return (
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
