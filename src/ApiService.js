@@ -100,10 +100,12 @@ export const apiService = {
     },
 
     async addStory(story) {
+        const token = localStorage.getItem('token');
         const response = await fetch(`${BASE_URL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(story),
         });

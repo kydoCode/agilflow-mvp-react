@@ -15,11 +15,10 @@ function App() {
 
   useEffect(() => {
     store.initializeAuth();
-    console.log('App.jsx useEffect - initializeAuth called');
-    console.log('App.jsx - After useEffect, isAuthenticated:', isAuthenticated);
-  }, []);
+  }, [store]);
 
-  console.log('App.jsx - isAuthenticated:', isAuthenticated);
+  console.log('App.jsx - isAuthenticated:', isAuthenticated); // Add this line
+
   return (
     <>
     <BrowserRouter>
@@ -29,7 +28,7 @@ function App() {
         <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
-      
+
     </>
   );
 }
