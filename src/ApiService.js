@@ -42,16 +42,29 @@ export const apiService = {
                 'Authorization': `Bearer ${token}`
             },
         });
+        if (!response.ok) {
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
         return response.json();
     },
 
     async getStories() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found. Please log in.'); // Handle missing token
+        }
         const response = await fetch(`${BASE_URL}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Include token here
             },
         });
+        if (!response.ok) {
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
         return response.json();
     },
     

@@ -3,12 +3,18 @@ import { Plus, X } from 'lucide-react';
 import { useStore } from '../store';
 import Card from '../components/ui/Card';
 import Modal from '../components/ui/Modal';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
-  const { stories, addStory, updateStory, deleteStory } = useStore();
+  const { stories, fetchStories, addStory, updateStory, deleteStory } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchStories();
+  }, [fetchStories]);
+
   const filterByStatus = (status) => {
-    const filteredStories = stories.filter((story) => story.status === status);
+    return stories.filter((story) => story.status === status);
     return filteredStories;
   };
 
