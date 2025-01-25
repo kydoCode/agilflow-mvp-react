@@ -25,7 +25,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
         console.log(task);
         
         // Si tous les champs sont remplis, ajouter le nouvel user story
-        addStory({ action: task.iwant, need: task.sothat, user: task.as, status: task.status});
+        addStory({ action: task.action, need: task.need, status: task.status});
         
         setIsModalOpen(false);
       };
@@ -54,13 +54,18 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             <label htmlFor="as" className="block text-sm font-medium text-gray-700">
               As a type of user
             </label>
-            <input
-              id="as"
+            <select
+              id="user"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               value={editedStory.user}
               onChange={(e) => setEditedStory({ ...editedStory, user: e.target.value })}
-              placeholder="as user/developer/product owner..."
-            />
+            >
+              <option value="developer">Developer</option>
+              <option value="tester">Tester</option>
+              <option value="product owner">Product Owner</option>
+              <option value="scrum master">Scrum Master</option>
+              <option value="team member">Team Member</option>
+            </select>
           </div>
           <div>
             <label htmlFor="iwant" className="block text-sm font-medium text-gray-700">
@@ -75,15 +80,15 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
             />
           </div>
           <div>
-            <label htmlFor="sothat" className="block text-sm font-medium text-gray-700">
-              So that
+            <label htmlFor="need" className="block text-sm font-medium text-gray-700">
+              Need
             </label>
             <textarea
-              id="sothat"
+              id="need"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               value={editedStory.need}
               onChange={(e) => setEditedStory({ ...editedStory, need: e.target.value })}
-              placeholder="So that..."
+              placeholder="Need..."
               rows={3}
             />
           </div>
@@ -134,35 +139,40 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
                   </button>
                 </div>
                 <div className="space-y-4">
+          <div>
+            <label htmlFor="as" className="block text-sm font-medium text-gray-700">
+              As a type of user
+            </label>
+            <select
+              id="user"
+              name="user"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              value={task.user}
+              onChange={handleInputChange}
+            >
+              <option value="developer">Developer</option>
+              <option value="tester">Tester</option>
+              <option value="product owner">Product Owner</option>
+              <option value="scrum master">Scrum Master</option>
+              <option value="team member">Team Member</option>
+            </select>
+          </div>
                   <div>
-                    <label htmlFor="as" className="block text-sm font-medium text-gray-700">
-                      As a type of user
+                    <label htmlFor="action" className="block text-sm font-medium text-gray-700">
+                      Action
                     </label>
                     <input
-                      id="as"
-                      name="as"
+                      id="action"
+                      name="action"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                      value={task.as}
+                      value={task.action}
                       onChange={handleInputChange}
-                      placeholder="as user/developper/productowner..."
+                      placeholder="Action..."
                     />
                   </div>
                   <div>
-                    <label htmlFor="iwant" className="block text-sm font-medium text-gray-700">
-                      I want
-                    </label>
-                    <input
-                      id="iwant"
-                      name="iwant"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                      value={task.iwant}
-                      onChange={handleInputChange}
-                      placeholder="I want..."
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="sothat" className="block text-sm font-medium text-gray-700">
-                      So that
+                    <label htmlFor="need" className="block text-sm font-medium text-gray-700">
+                      Need
                     </label>
                     <textarea
                       id="sothat"
