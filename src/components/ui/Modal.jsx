@@ -198,6 +198,38 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
                       <option value="done">Done</option>
                     </select>
                   </div>
+                  <div>
+                    <label htmlFor="priority" className="block text-sm font-medium text-gray-700">
+                      Priority
+                    </label>
+                    <select
+                      id="priority"
+                      name="priority"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                      value={task.priority}
+                      onChange={handleInputChange}
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="priority" className="block text-sm font-medium text-gray-700">
+                      Priority
+                    </label>
+                    <select
+                      id="priority"
+                      name="priority"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                      value={task.priority}
+                      onChange={handleInputChange}
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
                   <div className="mt-6 flex justify-end space-x-3">
                     <button
                       className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -212,7 +244,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
                       Add user story
                     </button>
                   </div>
-                </div> 
+                </div>
              </div>
              </div>
              )}
