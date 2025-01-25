@@ -14,15 +14,27 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Kanban Board</h1>
-      <div className="flex justify-end mb-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"
-          onClick={() => setIsModalOpen(true)}
-        >
-          <Plus className="mr-2" size={16} />
-          Add Task
-        </button>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Kanban Board</h1>
+        <div className="flex items-center">
+          {/* User Profile Circle */}
+          <div className="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center mr-4">
+            {useStore.getState().user?.firstName ? useStore.getState().user.firstName.charAt(0).toUpperCase() : '?'}
+          </div>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center mr-2"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <Plus className="mr-2" size={16} />
+            Add Task
+          </button>
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+            onClick={() => useStore.getState().logout()}
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

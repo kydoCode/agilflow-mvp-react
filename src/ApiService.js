@@ -13,6 +13,10 @@ export const apiService = {
                 password,
             }),
         });
+        if (!response.ok) {
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
         return response.json();
     },
     async register(name, email, password, role) {

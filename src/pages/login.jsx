@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Lock } from 'lucide-react';
 import { apiService } from "../../src/ApiService";
 import { useStore } from '../store';
@@ -9,9 +9,16 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const isAuthenticated = useStore((state) => state.isAuthenticated);
   const setIsAuthenticated = useStore((state) => state.setIsAuthenticated);
   const setToken = useStore((state) => state.setToken);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/'); // Redirect to dashboard if already authenticated
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,11 +35,11 @@ export default function Login() {
       // TODO: Add logic to store the token and redirect the user
       console.log('Token stored:', data.token);
       setIsAuthenticated(true);
-      console.log('setIsAuthenticated(true) called in login.jsx');
+      setToken(data.token); // Store token in store
       navigate('/'); // Redirect to the home page or dashboard
-    } catch (err) {
-      setError('Login failed. Please check your credentials.');
-      console.error('Login error:', err);
+    } catch (error) { // Renamed err to error for clarity
+      setError(error.message || 'Login failed. Please check your credentials.'); // Display error message from API
+      console.error('Login error:', error);
     } finally {
       setIsLoading(false);
     }
