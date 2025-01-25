@@ -109,6 +109,10 @@ export const apiService = {
             },
             body: JSON.stringify(story),
         });
+        if (!response.ok) {
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
         return response.json();
     }
 }

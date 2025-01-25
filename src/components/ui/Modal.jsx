@@ -25,7 +25,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
         console.log(task);
         
         // Si tous les champs sont remplis, ajouter le nouvel user story
-        addStory({user: task.as, action: task.iwant, need: task.sothat, status: task.status});
+        addStory({ action: task.iwant, need: task.sothat, user: task.as, status: task.status});
         
         setIsModalOpen(false);
       };
