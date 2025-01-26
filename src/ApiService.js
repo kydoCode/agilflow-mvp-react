@@ -1,5 +1,5 @@
-const BASE_URL = 'http://localhost:3000/api/userstories';
-const BASE_URL_TWO = 'http://localhost:3000/api/auth';
+const BASE_URL = 'http://127.0.0.1:3000/api/userstories';
+const BASE_URL_TWO = 'http://127.0.0.1:3000/api/auth';
 
 export const apiService = {
     async login(email, password) {
