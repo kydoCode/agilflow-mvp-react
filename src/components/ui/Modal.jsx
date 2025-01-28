@@ -4,8 +4,8 @@ import { useStore } from "../../store";
 
 export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave, isEditing }) {
     const { addStory, updateStory } = useStore();
-    const [task, setTask] = useState({ role: '', action: '', need: '', status: 'todo', priority: 'medium' });
-    const [editedStory, setEditedStory] = useState(editingStory || { role: '', action: '', need: '', status: 'todo', priority: 'medium' });
+    const [task, setTask] = useState({ role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
+    const [editedStory, setEditedStory] = useState(editingStory || { role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
 
     // Fonction qui permet de mettre à jour le state task en fonction des champs de saisie
     const handleInputChange = (e) => {
@@ -20,7 +20,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
 
     const handleAddTask = () => {
         // Vérifier que tous les champs sont remplis
-        console.log(task);
+        console.log("Data sent to addStory:", task);
 
         addStory({
             role: task.role,
@@ -34,7 +34,13 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
       };
 
     const handleSave = () => {
-        updateStory(editedStory.id, editedStory);
+        updateStory(editedStory.id, {
+            role: editedStory.role,
+            action: editedStory.action,
+            need: editedStory.need,
+            status: editedStory.status,
+            priority: editedStory.priority,
+        });
         setIsModalOpen(false);
         console.log('Saved!');
     };

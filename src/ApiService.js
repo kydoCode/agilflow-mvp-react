@@ -15,6 +15,7 @@ export const apiService = {
         });
         if (!response.ok) {
             const message = await response.json();
+            console.error("getProfile error:", message);
             throw new Error(message.message || `HTTP error! status: ${response.status}`);
         }
         return response.json();

@@ -74,18 +74,22 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                 isEditing={isEditing}
             />
 
-            <div className="space-y-4">
-                <div className="flex items-start space-x-2">
-                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                        En tant que {assignee?.role}
-                    </span>
-                </div>
+                <div className="space-y-4">
+                    <div className="flex items-start space-x-2">
+                        <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                            En tant que
+                        </span>
+                        <p className="text-gray-800 font-medium pt-1 overflow-hidden text-ellipsis">
+                            {useStore.getState().user?.role}
+                        </p>
+                    </div>
+
 
                 <div className="flex items-start space-x-2">
                     <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                         je veux
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
+                    <p className="text-gray-800 font-medium pt-1 overflow-hidden text-ellipsis">
                         {action}
                     </p>
                 </div>
@@ -94,8 +98,8 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                     <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
                         pour/afin de
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
-                        {need}
+                    <p className="text-gray-800 font-medium pt-1 overflow-hidden text-ellipsis">
+                        afin de {need}
                     </p>
                 </div>
             </div>
