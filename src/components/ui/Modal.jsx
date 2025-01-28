@@ -4,12 +4,11 @@ import { useStore } from "../../store";
 
 export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave, isEditing }) {
     const { addStory, updateStory } = useStore();
-    const [task, setTask] = useState({ user: '', iwant: '', need: '', status: 'todo' });
-    const [editedStory, setEditedStory] = useState(editingStory || { user: '', action: '', need: '', status: 'todo' });
+    const [task, setTask] = useState({ role: '', action: '', need: '', status: 'todo', priority: 'medium' });
+    const [editedStory, setEditedStory] = useState(editingStory || { role: '', action: '', need: '', status: 'todo', priority: 'medium' });
 
     // Fonction qui permet de mettre à jour le state task en fonction des champs de saisie
     const handleInputChange = (e) => {
-      // Destructure le nom et la valeur du champ de saisie
       const { name, value } = e.target;
 
       setTask(prevState => ({
@@ -23,12 +22,12 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
         // Vérifier que tous les champs sont remplis
         console.log(task);
 
-        // Si tous les champs sont remplis, ajouter le nouvel user story
-        addStory({ 
-            user: task.user,
-            action: task.iwant, 
-            need: task.need, 
-            status: task.status 
+        addStory({
+            role: task.role,
+            action: task.action,
+            need: task.need,
+            status: task.status,
+            priority: task.priority,
         });
 
         setIsModalOpen(false);
@@ -59,10 +58,10 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
               As a type of user
             </label>
             <select
-              id="user"
+              id="role"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={editedStory.user}
-              onChange={(e) => setEditedStory({ ...editedStory, user: e.target.value })}
+              value={editedStory.role}
+              onChange={(e) => setEditedStory({ ...editedStory, role: e.target.value })}
             >
               <option value="developer">Developer</option>
               <option value="tester">Tester</option>
@@ -163,10 +162,10 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
               As a type of user
             </label>
             <select
-              id="user"
-              name="user"
+              id="role"
+              name="role"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-              value={task.user}
+              value={task.role}
               onChange={handleInputChange}
             >
               <option value="developer">Developer</option>
