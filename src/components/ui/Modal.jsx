@@ -4,7 +4,7 @@ import { useStore } from "../../store";
 
 export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave, isEditing }) {
     const { addStory, updateStory } = useStore();
-    const [task, setTask] = useState({ as: '', iwant: '', need: '', status: 'todo' });
+    const [task, setTask] = useState({ user: '', iwant: '', need: '', status: 'todo' });
     const [editedStory, setEditedStory] = useState(editingStory || { user: '', action: '', need: '', status: 'todo' });
 
     // Fonction qui permet de mettre à jour le state task en fonction des champs de saisie
@@ -12,7 +12,6 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
       // Destructure le nom et la valeur du champ de saisie
       const { name, value } = e.target;
 
-      // Met à jour le state task en fonction du champ de saisie
       setTask(prevState => ({
         ...prevState,
         [name]: value
@@ -25,7 +24,12 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
         console.log(task);
 
         // Si tous les champs sont remplis, ajouter le nouvel user story
-        addStory({ action: task.action, need: task.need, status: task.status});
+        addStory({ 
+            user: task.user,
+            action: task.iwant, 
+            need: task.need, 
+            status: task.status 
+        });
 
         setIsModalOpen(false);
       };
@@ -174,7 +178,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
           </div>
                   <div>
                     <label htmlFor="action" className="block text-sm font-medium text-gray-700">
-                      Action
+                      I want
                     </label>
                     <input
                       id="action"
@@ -182,7 +186,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       value={task.action}
                       onChange={handleInputChange}
-                      placeholder="Action..."
+                      placeholder="I want..."
                     />
                   </div>
                   <div>
