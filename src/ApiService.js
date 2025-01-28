@@ -105,6 +105,11 @@ export const apiService = {
 
     async addStory(story) {
         const token = localStorage.getItem('token');
+        console.log("Request Headers:", {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        });
+        console.log("Request Body:", JSON.stringify(story));
         const response = await fetch(`${BASE_URL}`, {
             method: 'POST',
             headers: {
@@ -114,8 +119,9 @@ export const apiService = {
             body: JSON.stringify(story),
         });
         if (!response.ok) {
-            const message = await response.json();
-            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+            const error = await response.json(); // Capture the error response
+            console.error("Full error response:", error); // Log the full error response
+            throw new Error(error.message || `HTTP error! status: ${response.status}`);
         }
         return response.json();
     }
