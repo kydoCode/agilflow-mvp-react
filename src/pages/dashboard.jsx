@@ -48,7 +48,7 @@ export default function Dashboard() {
             <h2 className='text-xl font-semibold mb-2'>Todo</h2>
             <div className='space-y-2'>
                {filterByStatus('todo').map(story => (
-                  <Card key={story.id} id={story.id} assignee={story.assignee} action={story.action} need={story.need} priority={story.priority} role={story.assignee?.role} />
+                  <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>
          </div>
@@ -57,7 +57,7 @@ export default function Dashboard() {
             <h2 className='text-xl font-semibold mb-2'>Doing</h2>
             <div className='space-y-2'>
                {filterByStatus('doing').map(story => (
-                  <Card key={story.id} id={story.id} assignee={story.assignee} action={story.action} need={story.need} priority={story.priority} role={story.assignee?.role} />
+                  <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>
          </div>
@@ -66,7 +66,7 @@ export default function Dashboard() {
             <h2 className='text-xl font-semibold mb-2'>Done</h2>
             <div className='space-y-2'>
                {filterByStatus('done').map(story => (
-                  <Card key={story.id} id={story.id} assignee={story.assignee} action={story.action} need={story.need} priority={story.priority} role={story.assignee?.role} />
+                  <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>
          </div>

@@ -40,7 +40,6 @@ export default function Login() {
     }
   };
 
-  console.log('Login.jsx - isAuthenticated on render:', useStore.getState().isAuthenticated); // Log on render
 
   return (
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">

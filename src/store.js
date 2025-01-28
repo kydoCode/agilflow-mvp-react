@@ -11,14 +11,9 @@ export const useStore = create(
     setToken: (token) => set({ token: token }),
 
     initializeAuth: () => {
-      console.log('initializeAuth - start'); // Added log
+      console.log('initializeAuth - start');
       const token = localStorage.getItem('token');
-      const currentIsAuthenticated = get().isAuthenticated;
-      console.log('initializeAuth - token:', token, 'isAuthenticated:', currentIsAuthenticated);
-      if (currentIsAuthenticated) {
-        console.log('initializeAuth - already authenticated, skipping profile fetch');
-        return; // Skip fetching profile if already authenticated
-      }
+      console.log('initializeAuth - token:', token);
       if (token) {
         console.log('initializeAuth - token found, fetching profile');
         apiService.getProfile(token)
@@ -28,11 +23,14 @@ export const useStore = create(
           })
           .catch(error => {
             console.error('initializeAuth - error fetching profile:', error);
-            localStorage.removeItem('token'); // Clear invalid token
+            localStorage.removeItem('token');
             set({ isAuthenticated: false, user: null });
           });
+      } else {
+        console.log('initializeAuth - no token found');
+        set({ isAuthenticated: false, user: null });
       }
-      console.log('initializeAuth - end'); // Added log
+      console.log('initializeAuth - end');
     },
 
     login: async (email, password) => {
