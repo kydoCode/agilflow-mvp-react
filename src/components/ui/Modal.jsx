@@ -1,11 +1,17 @@
+import React, { useState, useEffect } from 'react';
 import { X } from "lucide-react";
-import { useState } from "react";
 import { useStore } from "../../store";
 
-export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave, isEditing }) {
+export default function Modal({ modalOpen, setIsModalOpen, editingStory }) {
     const { addStory, updateStory } = useStore();
     const [task, setTask] = useState({ role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
     const [editedStory, setEditedStory] = useState(editingStory || { role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
+
+    useEffect(() => {
+        if (editingStory) {
+            setEditedStory(editingStory);
+        }
+    }, [editingStory]);
 
     // Fonction qui permet de mettre à jour le state task en fonction des champs de saisie
     const handleInputChange = (e) => {
@@ -46,7 +52,7 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory, onSave,
     };
 
 
-    if (isEditing) {
+    if (editingStory) {
       return(
         <>
         {modalOpen && (

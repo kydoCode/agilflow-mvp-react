@@ -31,7 +31,6 @@ describe('User Story CRUD Operations', () => {
       expect(response.body).to.have.property('user');
       expect(response.body).to.have.property('action');
       expect(response.body).to.have.property('need');
-      expect(response.body).to.have.property('assignedTo');
     });
   });
 
@@ -48,6 +47,7 @@ describe('User Story CRUD Operations', () => {
       expect(response.body).to.have.property('id', createdStoryId);
       expect(response.body).to.have.property('action', 'Write an updated test');
       expect(response.body).to.have.property('need', 'To ensure the application works correctly with updates');
+      expect(response.body).to.not.have.property('assignedTo');
     });
   });
 

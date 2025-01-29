@@ -50,16 +50,16 @@ export const apiService = {
         return response.json();
     },
 
-    async getStories() {
+    async getStories(userId) {
         const token = localStorage.getItem('token');
         if (!token) {
             throw new Error('No token found. Please log in.'); // Handle missing token
         }
-        const response = await fetch(`${BASE_URL}`, {
+        const response = await fetch(`${BASE_URL}?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Include token here
+                'Authorization': `Bearer ${token}`
             },
         });
         if (!response.ok) {
@@ -68,73 +68,24 @@ export const apiService = {
         }
         return response.json();
     },
-    
-    async getStoryById(id) {
-        const response = await fetch(`${BASE_URL}/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        return response.json();
-    },
 
-    async updateStory(id, story) {
+    async updateStory(id, updatedStory) {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${BASE_URL}/${id}`, {
-            method: 'PUT',
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(`${BASE_URL}/${id}`, { // Use BASE_URL and include the id in the URL
+            method: 'PUT', // Use PUT method for updates
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(story),
-        });
-        return response.json();
-    },
-
-    async deleteStory(id) {
-        const token = localStorage.getItem('token');
-        const response = await fetch(`${BASE_URL}/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-        return response.json();
-    },
-
-    async addStory(story) {
-        const token = localStorage.getItem('token');
-        console.log("Request Headers:", {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        });
-        console.log("Request Body:", JSON.stringify(story));
-        const response = await fetch(`${BASE_URL}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(story),
+            body: JSON.stringify(updatedStory),
         });
         if (!response.ok) {
-            const error = await response.json(); // Capture the error response
-            console.error("Full error response:", error); // Log the full error response
-            throw new Error(error.message || `HTTP error! status: ${response.status}`);
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
         }
         return response.json();
-    }
-}
-
-// Utilisation (Par exemple sur login.jsx)
-// On importe le service
-// import { apiService } from "../ApiService";
-
-// On appelle le service 
-//                     // email et password récupéré depuis la page login.jsx
-// const datas = await apiService.login(email, password);
-
-// Récupérer le profil
-// const profile = await apiService.getProfile(datas.token)
+    },
+};

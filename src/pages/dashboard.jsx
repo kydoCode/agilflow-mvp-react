@@ -6,16 +6,19 @@ import Modal from '../components/ui/Modal';
 import { useEffect } from 'react';
 
 export default function Dashboard() {
-  const { stories, fetchStories, addStory, updateStory, deleteStory } = useStore();
+  const { stories, fetchStories, addStory, updateStory, deleteStory, user, isAuthenticated } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetchStories();
-  }, [fetchStories]);
+    if (isAuthenticated) {
+      console.log("User from store:", user); // Log user object
+      fetchStories(user.id); // Pass userId to fetchStories
+    }
+  }, [fetchStories, isAuthenticated, user]);
 
   const filterByStatus = (status) => {
-    return stories.filter((story) => story.status === status);
-    return filteredStories;
+    return stories
+      .filter((story) => story.status === status)
   };
 
   return (
