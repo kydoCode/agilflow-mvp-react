@@ -88,4 +88,26 @@ export const apiService = {
         }
         return response.json();
     },
+
+    async addStory(newStory) {
+        console.log('addStory - newStory:', newStory);
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(`${BASE_URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(newStory),
+        });
+        if (!response.ok) {
+            const message = await response.json();
+            console.error('addStory error:', message);
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    },
 };
