@@ -44,6 +44,6 @@ function App() {
     </>
   );
 }
-{/* Added db_dump.sql */}
+{/* Added db_dump.sql > regular updates*/}
 
 export default App;
