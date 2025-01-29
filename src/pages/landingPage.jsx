@@ -1,7 +1,9 @@
 import { Link } from 'lucide-react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from '../../public/images/agilflow_logo_nobg.png';
+// import logo from '../../public/images/agilflow_logo_nobg.png';
+import logo from '../assets/images/agilflow_logo_nobg.png';
+
 
 export default function LandingPage() {
   const navigate = useNavigate()
