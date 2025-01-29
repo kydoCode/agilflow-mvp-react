@@ -19,8 +19,8 @@ export default function Register() {
       setSuccess('Inscription réussie ! Vous allez être redirigé...');
       console.log(data.name, data.email, data.password, data.role);
       setTimeout(() => {
-        window.location.href = '/';
-      }, 5000);
+        window.location.href = '/login';
+      }, 2000);
     } catch (err) {
       setError('Erreur lors de l\'inscription. Veuillez réessayer.');
       console.error(err);

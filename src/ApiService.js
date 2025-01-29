@@ -55,7 +55,9 @@ export const apiService = {
         if (!token) {
             throw new Error('No token found. Please log in.'); // Handle missing token
         }
-        const response = await fetch(`${BASE_URL}?userId=${userId}`, {
+        const url = `${BASE_URL}?userId=${userId}`;
+        console.log("Fetching stories from:", url); // Log the URL
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

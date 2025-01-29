@@ -20,6 +20,7 @@ export const useStore = create(
           .then(profile => {
             set({ isAuthenticated: true, user: profile });
             console.log('initializeAuth - profile fetched and set', profile);
+            console.log('initializeAuth - user id:', profile.id);
           })
           .catch(error => {
             console.error('initializeAuth - error fetching profile:', error);
@@ -81,7 +82,7 @@ export const useStore = create(
       const response = await apiService.updateStory(id, updatedStory);
       set((state) => ({
         stories: state.stories.map((story) =>
-          story.id === id ? { ...story, ...response } : story
+          story.id === id ? response.userStory : story // Access userStory from response
         ),
       }));
     },
@@ -93,21 +94,25 @@ export const useStore = create(
       }));
     },
 
-    moveStory: (id, status) =>
+    moveStory: (id, status) => {
       set((state) => ({
         stories: state.stories.map((story) =>
-          story.id === id ? { ...story, status, updatedAt: new Date() } : story
+          story.id === id ? { ...story, status } : story
         ),
-      })),
+      }));
+      get().updateStory(id, { status });
+    },
 
-    fetchStories: async () => {
+    fetchStories: async (userId) => {
       try {
         const user = get().user;
+        console.log("store - fetchStories - user from store:", user); // Log user from store in fetchStories
+        console.log("store - fetchStories - userId param:", userId); // Log userId param in fetchStories
         if (!user) {
           console.error("User not logged in");
           return;
         }
-        const fetchedStories = await apiService.getStories(user.id);
+        const fetchedStories = await apiService.getStories(userId);
         set({ stories: fetchedStories });
       } catch (error) {
         console.error("Fetch stories error:", error);

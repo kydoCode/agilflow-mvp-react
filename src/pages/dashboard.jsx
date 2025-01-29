@@ -11,8 +11,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("User from store:", user); // Log user object
-      fetchStories(user.id); // Pass userId to fetchStories
+      console.log("Dashboard - User from store:", user); // Log user object in dashboard
+      if (user && user.id) {
+        fetchStories(user.id); // Pass userId to fetchStories
+      } else {
+        console.error("Dashboard - User object or user.id is undefined:", user);
+      }
     }
   }, [fetchStories, isAuthenticated, user]);
 
@@ -50,7 +54,7 @@ export default function Dashboard() {
          <div className="bg-gray-100 p-4 rounded-lg">
             <h2 className='text-xl font-semibold mb-2'>Todo</h2>
             <div className='space-y-2'>
-               {filterByStatus('todo').map(story => (
+               {stories.filter(story => story.status === 'todo').map(story => (
                   <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>
@@ -59,7 +63,7 @@ export default function Dashboard() {
          <div className="bg-gray-100 p-4 rounded-lg">
             <h2 className='text-xl font-semibold mb-2'>Doing</h2>
             <div className='space-y-2'>
-               {filterByStatus('doing').map(story => (
+               {stories.filter(story => story.status === 'doing').map(story => (
                   <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>
@@ -68,7 +72,7 @@ export default function Dashboard() {
          <div className="bg-gray-100 p-4 rounded-lg">
             <h2 className='text-xl font-semibold mb-2'>Done</h2>
             <div className='space-y-2'>
-               {filterByStatus('done').map(story => (
+               {stories.filter(story => story.status === 'done').map(story => (
                   <Card key={story.id} id={story.id} action={story.action} need={story.need} priority={story.priority} role={story.role} />
                ))}
             </div>

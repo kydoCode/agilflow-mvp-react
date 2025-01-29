@@ -3,9 +3,9 @@ import { X } from "lucide-react";
 import { useStore } from "../../store";
 
 export default function Modal({ modalOpen, setIsModalOpen, editingStory }) {
-    const { addStory, updateStory } = useStore();
+    const { addStory, updateStory, fetchStories, user } = useStore();
     const [task, setTask] = useState({ role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
-    const [editedStory, setEditedStory] = useState(editingStory || { role: 'developer', action: '', need: '', status: 'todo', priority: 'medium' });
+    const [editedStory, setEditedStory] = useState(editingStory || { action: '', need: '', status: 'todo', priority: 'medium', role: 'developer' });
 
     useEffect(() => {
         if (editingStory) {
@@ -39,17 +39,23 @@ export default function Modal({ modalOpen, setIsModalOpen, editingStory }) {
         setIsModalOpen(false);
       };
 
-    const handleSave = () => {
-        updateStory(editedStory.id, {
-            role: editedStory.role,
-            action: editedStory.action,
-            need: editedStory.need,
-            status: editedStory.status,
-            priority: editedStory.priority,
-        });
-        setIsModalOpen(false);
-        console.log('Saved!');
-    };
+    const handleSave = async () => {
+        try {
+          await updateStory(editedStory.id, {
+              role: editedStory.role,
+              action: editedStory.action,
+              need: editedStory.need,
+              status: editedStory.status,
+              priority: editedStory.priority,
+          });
+          setIsModalOpen(false);
+          console.log('Saved!');
+          fetchStories(user.id); // Refetch stories after successful update
+        } catch (error) {
+          console.error("Error updating story:", error);
+          // Handle error appropriately, e.g., display an error message to the user
+        }
+      };
 
 
     if (editingStory) {
