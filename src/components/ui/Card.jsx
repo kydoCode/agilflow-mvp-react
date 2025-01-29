@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md';
 import Modal from './Modal';
 import { useStore } from '../../store';
 
-export default function Card({ id, assignee, action, need, status, priority }) {
+export default function Card({ id, action, need, status, priority }) {
     const { deleteStory, updateStory } = useStore();
 
     const [editModal, setEditModal] = useState(false);
@@ -69,7 +69,7 @@ export default function Card({ id, assignee, action, need, status, priority }) {
             <Modal
                 modalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
-                editingStory={{ id, assignee, action, need, status }}
+                editingStory={{ id, action, need, status }}
                 onSave={handleSaveEdit}
                 isEditing={isEditing}
             />

@@ -39,6 +39,7 @@ export const useStore = create(
         localStorage.setItem('token', response.token); // Store token first
         try {
           const profile = await apiService.getProfile(response.token);
+          localStorage.setItem('user', JSON.stringify(profile));
           set({ user: profile, isAuthenticated: true });
           return true;
         } catch (error) {
@@ -80,7 +81,7 @@ export const useStore = create(
       const response = await apiService.updateStory(id, updatedStory);
       set((state) => ({
         stories: state.stories.map((story) =>
-          story.id === id ? { ...story, ...response, updatedAt: new Date(response.updatedAt) } : story
+          story.id === id ? { ...story, ...response } : story
         ),
       }));
     },
@@ -101,7 +102,12 @@ export const useStore = create(
 
     fetchStories: async () => {
       try {
-        const fetchedStories = await apiService.getStories();
+        const user = get().user;
+        if (!user) {
+          console.error("User not logged in");
+          return;
+        }
+        const fetchedStories = await apiService.getStories(user.id);
         set({ stories: fetchedStories });
       } catch (error) {
         console.error("Fetch stories error:", error);
