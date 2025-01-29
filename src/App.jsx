@@ -22,6 +22,7 @@ function App() {
 
   return (
     <>
+    {/* Production settings */}
     {/* <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -31,6 +32,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter> */}
+    {/* Development settings */}
   <BrowserRouter>
       <Routes>
         <Route path="/" element={isAuthenticated ? <Dashboard /> : <Login /> } />
