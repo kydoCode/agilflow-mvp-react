@@ -3,6 +3,8 @@ import { Mail, Lock } from 'lucide-react';
 import { apiService } from "../../src/ApiService";
 import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -42,6 +44,8 @@ export default function Login() {
 
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Connexion</h1>
@@ -95,6 +99,8 @@ export default function Login() {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
+    </>
   );
 }
