@@ -85,14 +85,15 @@ export default function Register() {
             {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
             <Lock className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex items-center">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">
               Role
             </label>
-            <div className="relative">
+            <div className="relative flex items-center">
+              <User className="relative left-3 top-2 text-gray-400" size={20} />
               <select
                 {...register("role", { required: "Le role est obligatoire" })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10 origin-top-left"
                 id="role"
                 required
                 >
@@ -102,9 +103,9 @@ export default function Register() {
                 <option value="scrum master">Scrum Master</option>
                 <option value="team member">Team Member</option>
               </select>
-              {errors.role && <p className='text-red-500'>{errors.role?.message}</p>}
+                {errors.role && <p className='text-red-500'>{errors.role?.message}</p>}
             </div>
-          </div>
+            </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

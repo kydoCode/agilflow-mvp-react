@@ -50,12 +50,12 @@ export const apiService = {
         return response.json();
     },
 
-    async getStories(userId) {
+    async getStories() {
         const token = localStorage.getItem('token');
         if (!token) {
             throw new Error('No token found. Please log in.'); // Handle missing token
         }
-        const url = `${BASE_URL}?userId=${userId}`;
+        const url = `${BASE_URL}`;
         console.log("Fetching stories from:", url); // Log the URL
         const response = await fetch(url, {
             method: 'GET',
