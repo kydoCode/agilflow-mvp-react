@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Lock } from 'lucide-react';
 import { apiService } from "../../src/ApiService";
 import { useStore } from '../store';
@@ -41,6 +41,10 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+
+     useEffect(() => {
+        document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Login');
+      }, []);
 
 
   return (

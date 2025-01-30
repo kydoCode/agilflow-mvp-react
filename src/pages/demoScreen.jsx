@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import logo from '../assets/images/agilflow_logo_nobg.png';
 import tablet from '../assets/images/AF_Tab.png';
 import { Link } from 'react-router-dom';
 
 
 export default function DemoScreen() {
+
+     useEffect(() => {
+        document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Demo');
+      }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#0066FF] to-[#00FF88]">
       {/* Navigation */}

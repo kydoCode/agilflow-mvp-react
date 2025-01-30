@@ -1,5 +1,5 @@
 // import { Link } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import dashboard_screen from '../assets/images/screencast_03.png';
 import computer_screen from '../assets/images/desktop_screen.png';
@@ -9,6 +9,9 @@ import Footer from '../components/ui/Footer';
 export default function LandingPage() {
   const navigate = useNavigate()
   
+    useEffect(() => {
+      document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Home');
+    }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020B2D] via-[#123363] to-[#0D8B7D]">

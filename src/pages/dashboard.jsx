@@ -10,6 +10,11 @@ export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Dashboard');
+  }, []);
+  
+
+  useEffect(() => {
     if (isAuthenticated) {
       console.log("Dashboard - User from store:", user); // Log user object in dashboard
       if (user && user.id) {
