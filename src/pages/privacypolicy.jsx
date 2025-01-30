@@ -60,19 +60,26 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold">6. Cookies et Suivi</h2>
             <ul className="list-disc pl-5 text-left">
               <li>Nous utilisons uniquement des <strong>cookies nécessaires</strong> au bon fonctionnement du site et des <strong>cookies analytiques</strong> pour améliorer l’expérience utilisateur.</li>
-              <li>Certains <strong>cookies tiers</strong> (ex : Webkit Facebook) peuvent être déposés indépendamment de notre volonté.</li>
+              <li>Certains <strong>cookies tiers</strong> peuvent être déposés indépendamment de notre volonté.</li>
               <li>Une <strong>bannière de consentement</strong> s’affiche lors de votre première visite pour vous permettre de gérer vos préférences.</li>
             </ul>
           </section>
 
           <section className="space-y-4 text-justify">
-            <h2 className="text-2xl font-semibold">7. Sécurité des Données</h2>
-            <ul className="list-disc pl-5 text-left">
-              <li><strong>Certificat SSL (SHA256)</strong> pour sécuriser les connexions.</li>
-              <li><strong>Sauvegardes hebdomadaires</strong> des données.</li>
-              <li><strong>Hashage des mots de passe avec bcrypt + salt</strong> pour garantir leur sécurité.</li>
-            </ul>
-          </section>
+  <h2 className="text-2xl font-semibold">7. Sécurité des Données</h2>
+  <p>
+    Nous appliquons des mesures de protection visant à garantir la sécurité de vos données personnelles et à prévenir tout accès non autorisé, altération, perte ou divulgation.
+  </p>
+  <ul className="list-disc pl-5 text-left">
+    <li>Utilisation de technologies de chiffrement pour sécuriser les échanges</li>
+    <li>Mécanismes renforcés de protection des accès aux informations</li>
+    <li>Systèmes de sauvegardes régulières pour assurer l'intégrité des données</li>
+  </ul>
+  <p>
+    Malgré ces précautions, aucun système n'est infaillible. En cas d'incident de sécurité affectant vos données, nous prendrons les mesures nécessaires et vous informerons conformément aux réglementations en vigueur.
+  </p>
+</section>
+
 
           <section className="space-y-4 text-justify">
             <h2 className="text-2xl font-semibold">8. Modifications de la Politique de Confidentialité</h2>

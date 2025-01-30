@@ -13,7 +13,7 @@ export default function Footer() {
       Mentions légales
     </Link>{' '}
     |{' '}
-    <Link target="_blank" to="/privacypolicy" className="hover:text-white/80 transition-colors">
+    <Link target="_blank" to="/privacy-policy" className="hover:text-white/80 transition-colors">
       Politique de confidentialité
     </Link>
   </p>
