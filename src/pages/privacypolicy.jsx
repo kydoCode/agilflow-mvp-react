@@ -1,7 +1,13 @@
 import Footer from "../components/ui/Footer";
 import Header from "../components/ui/Header";
+import React, { useEffect } from 'react';
 
 export default function PrivacyPolicy() {
+
+     useEffect(() => {
+        document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Politique de confidentialité');
+      }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020B2D] via-[#123363] to-[#0D8B7D]">
       <Header />

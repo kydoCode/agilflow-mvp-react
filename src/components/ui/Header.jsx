@@ -20,7 +20,7 @@ export default function Header() {
                   AgilFlow
                 </Link>
                   {/* Ligne reliant le logo et le texte */}
-                 <div className="absolute left-12 top-1/2 w-6 h-[2px] bg-white"></div>
+                 {/* <div className="absolute left-12 top-1/2 w-6 h-[2px] bg-white"></div> */}
               </div>
     
               <div className="flex items-center space-x-4">

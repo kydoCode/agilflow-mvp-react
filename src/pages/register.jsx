@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Lock, User } from 'lucide-react';
 import { useStore } from '../store';
 import { useForm } from 'react-hook-form';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
 
 export default function Register() {
   const [error, setError] = useState('');
@@ -27,7 +29,13 @@ export default function Register() {
     }
   };
 
+     useEffect(() => {
+        document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Register');
+      }, []);
+
   return (
+    <>
+    <Header />
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Inscription</h1>
@@ -47,7 +55,7 @@ export default function Register() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
               type="text"
               placeholder="Nom complet"
-            />
+              />
             {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
             <User className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
@@ -60,7 +68,7 @@ export default function Register() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
               type="email"
               placeholder="Email"
-            />
+              />
             {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
             <Mail className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
@@ -73,7 +81,7 @@ export default function Register() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
               type="password"
               placeholder="******************"
-            />
+              />
             {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
             <Lock className="absolute left-3 top-2 text-gray-400" size={20} />
           </div>
@@ -87,7 +95,7 @@ export default function Register() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pl-10"
                 id="role"
                 required
-              >
+                >
                 <option value="developer">Developer</option>
                 <option value="tester">Tester</option>
                 <option value="product owner">Product Owner</option>
@@ -101,12 +109,14 @@ export default function Register() {
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-            >
+              >
               S'inscrire
             </button>
           </div>
         </form>
       </div>
     </div>
+    <Footer />
+              </>
   );
 }
