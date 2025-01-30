@@ -5,177 +5,96 @@ export default function Legal() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020B2D] via-[#123363] to-[#0D8B7D]">
       <Header />
-      <div className="container mx-auto px-4 pt-16 pb-32">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-5xl font-bold text-white mb-6"> 
-              AgilFlow - Mentions légales
-            </h1>
-            <div className="text-white space-y-4">
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">1. Introduction</h2>
-                <p>
-                  La présente Mentions légales explique comment AgilFlow collecte, utilise et protège vos données personnelles lorsque vous utilisez nos services. Nous nous engageons à respecter votre vie privée et à traiter vos données en conformité avec le Règlement Général sur la Protection des Données (RGPD).
-                </p>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">2. Données Collectées</h2>
-                <ul className="list-disc pl-5">
-                  <li>
-                    <strong>Données fournies par l'utilisateur</strong> : Nom,
-                    prénom, adresse e-mail.
-                  </li>
-                  <li>
-                    <strong>
-                      Données générées par l’utilisation de la plateforme
-                    </strong>
-                    : Contenus partagés, interactions avec le service.
-                  </li>
-                  <li>
-                    <strong>Données techniques</strong> : Adresse IP, type de
-                    navigateur, informations de connexion.
-                  </li>
-                </ul>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">3. Finalité de la Collecte des Données</h2>
-                <ul className="list-disc pl-5">
-                  <li>Répondre à vos demandes et assurer le support client.</li>
-                  <li>
-                    Améliorer l’expérience utilisateur et optimiser nos services.
-                  </li>
-                  <li>Réaliser des analyses statistiques.</li>
-                </ul>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">4. Partage des Données</h2>
-                <ul className="list-disc pl-5">
-                  <li>
-                    <strong>Hébergeur (IONOS)</strong> : Pour assurer la
-                    disponibilité technique du site.
-                  </li>
-                  <li>
-                    <strong>Autorités légales</strong> : En cas de réquisition
-                    par les autorités compétentes.
-                  </li>
-                  <li>
-                    <strong>Aucun partage commercial</strong> : Vos données ne
-                    seront ni vendues, ni cédées à des tiers à des fins
-                    publicitaires.
-                  </li>
-                </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">5. Vos Droits</h2>      
-                <p>
-                  Vous disposez des droits suivants sur vos données personnelles :
-                </p>
-                <ul className="list-disc pl-5">
-                  <li>
-                    Droit d’accès, de rectification, d’effacement et
-                    d’opposition.
-                  </li>
-                  <li>
-                    Droit à la limitation du traitement et à la portabilité des
-                    données.
-                  </li>
-                </ul>
-                <p>
-                  Pour exercer vos droits, contactez-nous à :{' '}
-                  <a
-                    href="mailto:contact@agilflow.app"
-                    className="text-blue-400 underline"
-                  >
-                    contact@agilflow.app
-                  </a>{' '}
-                  ou à l’adresse postale suivante :{' '}
-                  <strong>
-                    47 rue de la République, 83170 BRIGNOLES
-                  </strong>
-                  .
-                </p>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">6. Cookies et Suivi</h2>
-                <ul className="list-disc pl-5">
-                  <li>
-                    Nous utilisons uniquement des <strong>cookies nécessaires</strong> au
-                    bon fonctionnement du site et des{' '}
-                    <strong>cookies analytiques</strong> pour améliorer
-                    l’expérience utilisateur.
-                  </li>
-                  <li>
-                    Certains <strong>cookies tiers</strong> (ex : Webkit
-                    Facebook) peuvent être déposés indépendamment de notre
-                    volonté.
-                  </li>
-                  <li>
-                    Une <strong>bannière de consentement</strong> s’affiche lors
-                    de votre première visite pour vous permettre de gérer vos
-                    préférences.
-                  </li>
-                  <li>
-                    <strong>Cookies</strong> : Nous utilisons des cookies pour
-                    améliorer l’expérience utilisateur et nous assurer la
-                    sécurité de votre session.
-                  </li>
-                </ul>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">7. Sécurité des Données</h2>
-                <ul className="list-disc pl-5">
-                  <li>
-                    <strong>Certificat SSL (SHA256)</strong> pour sécuriser les
-                    connexions.
-                  </li>
-                  <li>
-                    <strong>Sauvegardes hebdomadaires</strong> des données.
-                  </li>
-                  <li>
-                    <strong>Hashage des mots de passe avec bcrypt + salt</strong>{' '}
-                    pour garantir leur sécurité.
-                  </li>
-                </ul>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">
-                  8. Modifications de la Politique de Confidentialité
-                </h2>
-                <p>
-                  Cette politique peut être mise à jour à tout moment. Nous vous
-                  informerons des changements importants via notre site web.
-                </p>
-              </section>
-              <section>
-                <h2 className="text-2xl font-semibold mb-2">9. Contact</h2>
-                <p>
-                  Si vous avez des questions, vous pouvez nous contacter à :
-                </p>
-                <ul className="list-disc pl-5">
-                  <li>
-                    <strong>Email</strong> :{' '}
-                    <a
-                      href="mailto:contact@agilflow.app"
-                      className="text-blue-400 underline"
-                    >
-                      contact@agilflow.app
-                    </a>
-                  </li>
-                  <li>
-                    <strong>Adresse postale</strong> : 47 rue de la République,
-                    83170 BRIGNOLES
-                  </li>
-                </ul>
-              </section>
-              <p className="text-gray-300 mt-4">
-                *Cette Politique de Confidentialité est en vigueur à compter du
-                [date à compléter].*
-              </p>
-            </div>
-          </div>
+      <div className="container mx-auto px-4 pt-16 pb-32 text-white">
+        <div className="max-w-2xl mx-auto text-center space-y-8">
+          <h1 className="text-5xl font-bold">AgilFlow - Mentions légales</h1>
+          
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">1. Informations Générales :</h2>
+            <ul className="list-disc pl-5 text-left">
+              <li><strong>Nom de l’entreprise ou projet</strong> : AgilFlow</li>
+              <li><strong>Forme juridique</strong> : Entreprise Individuelle (EI)</li>
+              <li><strong>Adresse du siège social</strong> : 47 rue de la République, 83170 BRIGNOLES</li>
+              <li><strong>Numéro SIRET</strong> : Non attribué</li>
+              <li><strong>Numéro TVA intracommunautaire</strong> : Non attribué</li>
+              <li><strong>Téléphone</strong> : 06 12 34 56 78</li>
+              <li><strong>Adresse e-mail officielle</strong> : <a href="mailto:contact@agilflow.app" className="text-blue-400 underline">contact@agilflow.app</a></li>
+              <li><strong>Responsable de la publication</strong> : Anon Nymous</li>
+            </ul>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">2. Hébergement du Site :</h2>
+            <ul className="list-disc pl-5 text-left">
+              <li><strong>Nom de l’hébergeur</strong> : IONOS SARL</li>
+              <li><strong>Adresse de l’hébergeur</strong> : 7, place de la Gare - BP 70109 57201 SARREGUEMINES</li>
+              <li><strong>Téléphone de l’hébergeur</strong> : 0970 808 911</li>
+              <li><strong>Site web de l’hébergeur</strong> : <a href="https://www.ionos.fr/" className="text-blue-400 underline">https://www.ionos.fr/</a></li>
+            </ul>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">3. Gestion des Données Personnelles :</h2>
+            <p><strong>Données collectées</strong> :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Nom, prénom, e-mail</li>
+              <li>Informations liées à l'utilisation du service (contenus partagés, interactions)</li>
+            </ul>
+            <p><strong>Finalité de la collecte</strong> :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Traitement des demandes et support client</li>
+              <li>Utilisation de la plateforme</li>
+              <li>Amélioration de l'expérience utilisateur et analyses statistiques</li>
+            </ul>
+            <p><strong>Partage des données</strong> :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Les données ne sont partagées qu'avec l'hébergeur IONOS pour des raisons techniques et légales minimales.</li>
+              <li>Aucune donnée ne sera cédée ou vendue à des tiers commerciaux.</li>
+              <li>En cas de réquisition par les autorités compétentes, AgilFlow se conformera à ses obligations légales.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">4. Droits des Utilisateurs :</h2>
+            <p>Conformément au RGPD, vous disposez des droits suivants sur vos données :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Accès, rectification, effacement, opposition, limitation du traitement et portabilité.</li>
+            </ul>
+            <p>Vous pouvez exercer ces droits en nous contactant à <a href="mailto:contact@agilflow.app" className="text-blue-400 underline">contact@agilflow.app</a> ou par courrier à l'adresse suivante : <strong>47 rue de la République, 83170 BRIGNOLES</strong>.</p>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">5. Cookies et Suivi :</h2>
+            <p><strong>Types de cookies utilisés</strong> :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Cookies nécessaires au bon fonctionnement du site</li>
+              <li>Cookies analytiques pour améliorer l'expérience utilisateur</li>
+              <li>Cookies tiers déposés par des outils externes (ex. Webkit Facebook) dont AgilFlow ne contrôle pas l'installation.</li>
+            </ul>
+            <p><strong>Gestion des cookies</strong> :</p>
+            <ul className="list-disc pl-5 text-left">
+              <li>Une bannière s'affichera lors de votre première visite pour obtenir votre consentement.</li>
+              <li>Vous pourrez modifier vos préférences via un lien en bas de page permettant de gérer les cookies.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">6. Sécurité des Données :</h2>
+            <ul className="list-disc pl-5 text-left">
+              <li>Certificat SSL (SHA256) pour le chiffrement des connexions</li>
+              <li>Sauvegardes hebdomadaires des données</li>
+              <li>Hashage des mots de passe avec <strong>bcrypt + salt</strong> pour une meilleure sécurité</li>
+            </ul>
+          </section>
+
+          <section className="space-y-4 text-justify">
+            <h2 className="text-2xl font-semibold">7. Informations de Contact :</h2>
+            <p><strong>Email de contact pour toute question relative à la politique de confidentialité ou aux demandes RGPD</strong> : <a href="mailto:contact@agilflow.app" className="text-blue-400 underline">contact@agilflow.app</a></p>
+            <p><strong>Adresse postale pour toute demande relative aux données personnelles</strong> : 47 rue de la République, 83170 BRIGNOLES</p>
+          </section>
         </div>
       </div>
       <Footer />
     </div>
-  )
+  );
 }

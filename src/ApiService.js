@@ -112,4 +112,22 @@ export const apiService = {
         }
         return response.json();
     },
+
+    async deleteStory(id) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found. Please log in.');
+        }
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        if (!response.ok) {
+            const message = await response.json();
+            throw new Error(message.message || `HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    },
 };
