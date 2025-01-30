@@ -15,8 +15,8 @@ export default function Legal() {
               <li><strong>Nom de l’entreprise ou projet</strong> : AgilFlow</li>
               <li><strong>Forme juridique</strong> : Entreprise Individuelle (EI)</li>
               <li><strong>Adresse du siège social</strong> : 47 rue de la République, 83170 BRIGNOLES</li>
-              <li><strong>Numéro SIRET</strong> : Non attribué</li>
-              <li><strong>Numéro TVA intracommunautaire</strong> : Non attribué</li>
+              <li><strong>Numéro SIRET</strong> : En cours d'attribution</li>
+              <li><strong>Numéro TVA intracommunautaire</strong> : En cours d'attribution</li>
               <li><strong>Téléphone</strong> : 06 12 34 56 78</li>
               <li><strong>Adresse e-mail officielle</strong> : <a href="mailto:contact@agilflow.app" className="text-blue-400 underline">contact@agilflow.app</a></li>
               <li><strong>Responsable de la publication</strong> : Anon Nymous</li>
@@ -69,7 +69,7 @@ export default function Legal() {
             <ul className="list-disc pl-5 text-left">
               <li>Cookies nécessaires au bon fonctionnement du site</li>
               <li>Cookies analytiques pour améliorer l'expérience utilisateur</li>
-              <li>Cookies tiers déposés par des outils externes (ex. Webkit Facebook) dont AgilFlow ne contrôle pas l'installation.</li>
+              <li>Certains cookies tiers peuvent être déposés par des services externes intégrés au site. AgilFlow n’exerce aucun contrôle sur leur installation et vous invite à consulter les politiques de confidentialité des tiers concernés.</li>
             </ul>
             <p><strong>Gestion des cookies</strong> :</p>
             <ul className="list-disc pl-5 text-left">
@@ -79,13 +79,20 @@ export default function Legal() {
           </section>
 
           <section className="space-y-4 text-justify">
-            <h2 className="text-2xl font-semibold">6. Sécurité des Données :</h2>
-            <ul className="list-disc pl-5 text-left">
-              <li>Certificat SSL (SHA256) pour le chiffrement des connexions</li>
-              <li>Sauvegardes hebdomadaires des données</li>
-              <li>Hashage des mots de passe avec <strong>bcrypt + salt</strong> pour une meilleure sécurité</li>
-            </ul>
-          </section>
+  <h2 className="text-2xl font-semibold">6. Sécurité des Données :</h2>
+  <p>
+    Nous mettons en place des mesures adaptées pour protéger vos données contre tout accès non autorisé, perte, altération ou divulgation, notamment :
+  </p>
+  <ul className="list-disc pl-5 text-left">
+    <li>Utilisation de protocoles de chiffrement pour sécuriser les échanges de données</li>
+    <li>Mécanismes de protection des accès aux informations sensibles</li>
+    <li>Mise en place de sauvegardes régulières pour prévenir toute perte de données</li>
+  </ul>
+  <p>
+    Cependant, malgré nos efforts pour assurer un haut niveau de sécurité, aucun système n'est totalement inviolable. En cas d'incident de sécurité affectant vos données personnelles, nous nous engageons à prendre les mesures nécessaires et à vous en informer conformément aux obligations légales en vigueur.
+  </p>
+</section>
+
 
           <section className="space-y-4 text-justify">
             <h2 className="text-2xl font-semibold">7. Informations de Contact :</h2>
