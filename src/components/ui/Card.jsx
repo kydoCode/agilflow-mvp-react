@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FiFlag } from 'react-icons/fi'; // replaced by Flag from lucid-react
 import { Flag } from "lucide-react";
 import { MdEdit } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md';
@@ -49,9 +48,8 @@ export default function Card({ id, assignee, action, need, status, priority }) {
 
     const priorityColor = getPriorityColor(priority);
 
-
     return (
-        <article className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 relative">
+        <article className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 relative overflow-hidden">
             <div className="absolute top-4 right-4 flex space-x-2">
                 <button aria-label="Edit" className="text-gray-500 hover:text-blue-500">
                     <MdEdit onClick={handleEditClick} size={20} />
@@ -61,10 +59,9 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                 </button>
             </div>
 
-             <div className="absolute bottom-4 right-4">
-                    <Flag size={20} color={priorityColor}/>
-                </div>
-
+            <div className="absolute bottom-4 right-4">
+                <Flag size={20} color={priorityColor}/>
+            </div>
 
             <Modal
                 modalOpen={isModalOpen}
@@ -79,7 +76,7 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                         En tant que
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
+                    <p className="text-gray-800 font-medium pt-1 break-words max-w-full sm:text-sm">
                          {assignee?.role}
                     </p>
                 </div>
@@ -88,7 +85,7 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                     <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                         je veux
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
+                    <p className="text-gray-800 font-medium pt-1 break-words max-w-full sm:text-sm">
                         {action}
                     </p>
                 </div>
@@ -97,7 +94,7 @@ export default function Card({ id, assignee, action, need, status, priority }) {
                     <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
                         pour/afin de
                     </span>
-                    <p className="text-gray-800 font-medium pt-1">
+                    <p className="text-gray-800 font-medium pt-1 break-words max-w-full sm:text-sm">
                         {need}
                     </p>
                 </div>
