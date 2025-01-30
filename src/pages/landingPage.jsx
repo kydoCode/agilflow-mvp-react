@@ -1,53 +1,19 @@
-import { Link } from 'lucide-react'
+// import { Link } from 'lucide-react'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-// import logo from '../../public/images/agilflow_logo_nobg.png';
-import logo from '../assets/images/agilflow_logo_nobg.png';
-
+import { useNavigate, Link } from 'react-router-dom'
+import dashboard_screen from '../assets/images/screencast_03.png';
+import computer_screen from '../assets/images/desktop_screen.png';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
 
 export default function LandingPage() {
   const navigate = useNavigate()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020B2D] via-[#123363] to-[#0D8B7D]">
-      {/* Navigation */}
-      <nav className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              {/* <a href="/" className="text-[#123363] text-xl font-bold">A</a> */}
-              <Link to="/"><img src={logo} alt="AgilFlow Logo" /></Link>
-            </div>
-            <Link to="/" className="text-white text-2xl font-bold">
-              AgilFlow
-            </Link>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            {isLoggedIn ? (
-              <>
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white font-medium hover:bg-white/20 transition-colors">
-                  JD
-                </div>
-                <button 
-                  onClick={() => setIsLoggedIn(false)}
-                  className="bg-white text-[#123363] px-6 py-2 rounded-full hover:bg-white/90 transition-colors font-medium"
-                >
-                  Log out
-                </button>
-              </>
-            ) : (
-              <button 
-                onClick={() => navigate('/login')}
-                className="bg-white text-[#123363] px-6 py-2 rounded-full hover:bg-white/90 transition-colors font-medium"
-              >
-                Log in
-              </button>
-            )}
-          </div>
-        </div>
-      </nav>
+      
+      <Header />
 
       {/* Rest of the component remains the same */}
       <div className="container mx-auto px-4 pt-16 pb-32">
@@ -98,7 +64,7 @@ export default function LandingPage() {
                     {/* Dashboard Content */}
                     <div className="pt-8">
                       <img 
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/design_02.jpeg-u6N41urbGxJqHj0wZocTnHVlGrrpVP.png"
+                        src={computer_screen}
                         alt="AgilFlow Dashboard Interface"
                         className="w-full h-auto transform scale-105 group-hover:scale-100 transition-transform duration-700"
                       />
@@ -166,7 +132,7 @@ export default function LandingPage() {
               </div>
             </div>
             <img 
-              src="/placeholder.svg?height=400&width=600"
+              src={dashboard_screen}
               alt="Dashboard Interface"
               className="w-full h-auto rounded-lg"
             />
@@ -190,6 +156,7 @@ export default function LandingPage() {
           </svg>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
