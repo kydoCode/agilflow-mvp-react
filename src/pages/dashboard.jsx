@@ -4,10 +4,16 @@ import { useStore } from '../store';
 import Card from '../components/ui/Card';
 import Modal from '../components/ui/Modal';
 import { useEffect } from 'react';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
 
 export default function Dashboard() {
   const { stories, fetchStories, addStory, updateStory, deleteStory } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = document.title.replace('%REACT_APP_PAGE_TITLE%', 'Dashboard');
+  }, []);
 
   useEffect(() => {
     fetchStories();
@@ -19,6 +25,8 @@ export default function Dashboard() {
   };
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Kanban Board</h1>
@@ -73,5 +81,7 @@ export default function Dashboard() {
       </div>
           <Modal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
     </div>
+    <Footer />
+    </>
   );
 }
