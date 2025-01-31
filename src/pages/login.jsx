@@ -1,8 +1,8 @@
+import { Lock, Mail } from 'lucide-react';
 import React, { useState } from 'react';
-import { Mail, Lock } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiService } from "../../src/ApiService";
 import { useStore } from '../store';
-import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -22,10 +22,12 @@ export default function Login() {
 
     try {
       const data = await apiService.login(email, password);
-      const profile = await apiService.getProfile(data.token);
+      // const profile = await apiService.getProfile(data.token);
+
+      console.log(data)
       
       // Handle successful login (e.g., store token, redirect)
-      console.log('Login successful:', { data, profile });
+      // console.log('Login successful:', { data, profile });
       
       // TODO: Add logic to store the token and redirect the user
       console.log('Token stored:', data.token);
@@ -90,9 +92,10 @@ export default function Login() {
             >
               {isLoading ? 'Connexion...' : 'Se connecter'}
             </button>
-            <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+            <Link to="/register" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >Register</Link>
+            {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
               Mot de passe oublié ?
-            </a>
+            </a> */}
           </div>
         </form>
       </div>
