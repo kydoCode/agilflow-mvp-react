@@ -66,7 +66,7 @@ export default function Card({ id, assignee, action, need, status, priority }) {
             <Modal
                 modalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
-                editingStory={{ id, assignee, action, need, status }}
+                editingStory={{ id, assignee, action, need, status, priority }}
                 onSave={handleSaveEdit}
                 isEditing={isEditing}
             />
