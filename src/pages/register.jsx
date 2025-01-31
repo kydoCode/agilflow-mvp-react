@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { Mail, Lock, User } from 'lucide-react';
 import { useStore } from '../store';
 import { useForm } from 'react-hook-form';
+import Header from '../components/ui/Header';
+import Footer from '../components/ui/Footer';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Register() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { register: registerUser } = useStore();
@@ -28,6 +34,8 @@ export default function Register() {
   };
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Inscription</h1>
@@ -119,5 +127,7 @@ export default function Register() {
         </form>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
